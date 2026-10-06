@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthy Lifestyle — Human Development</title>
+<meta name="description" content="A university lesson on healthy lifestyle: definitions, evidence, five pillars, behaviour change and habits.">
+<link rel="preload" href="fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Oswald';src:url(fonts/oswald.woff2) format('woff2');font-weight:200 700;font-display:block}
+@font-face{font-family:'DM Sans';src:url(fonts/dm-sans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:block}
+@font-face{font-family:'DM Sans';src:url(fonts/dm-sans-italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:block}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#030308;overflow:hidden;font-family:'DM Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;visibility:hidden}
+section.on{visibility:visible}
+section>*:not([style*=absolute]){position:relative}
+x-shape{display:block}
+x-shape[kind=ellipse]{border-radius:50%}
+hr{border:none}
+h1{font-size:96px;font-weight:600;line-height:1.1}
+h2{font-size:64px;font-weight:600;line-height:1.15}
+h3{font-size:44px;font-weight:600;line-height:1.2}
+p{line-height:1.4}
+aside{display:none}
+.pending{opacity:0}
+#ui{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08);z-index:10}
+#bar{height:100%;width:0;background:#C6FF3D;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+#hud{position:fixed;right:16px;bottom:14px;z-index:10;color:#BFC3D1;font:600 13px 'DM Sans',sans-serif;letter-spacing:1px;opacity:0;transition:opacity .3s;display:flex;gap:8px;align-items:center}
+body:hover #hud{opacity:1}
+#hud button{background:rgba(255,255,255,.1);color:#F4F1EA;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}
+#notes{position:fixed;left:16px;right:16px;bottom:24px;max-width:900px;margin:0 auto;background:rgba(14,15,26,.94);color:#F4F1EA;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px 20px;font:16px/1.5 'DM Sans',sans-serif;z-index:11;display:none}
+#help{position:fixed;left:50%;top:24px;transform:translateX(-50%);background:rgba(14,15,26,.9);color:#BFC3D1;border-radius:999px;padding:8px 18px;font:13px 'DM Sans',sans-serif;z-index:11;transition:opacity .6s;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+<section id="cover" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1040px;top:160px;width:760px;height:760px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:960px;top:780px;width:120px;height:120px;background:#FF5A36"></x-shape>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
+<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
+<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:248px;width:900px;font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Human Development · Healthy Lifestyle</p>
+<h1 data-build-in="rise 2 auto" style="position:absolute;left:128px;top:319px;width:900px;font-family:'Oswald', Arial, sans-serif;font-size:200px;font-weight:700;line-height:0.95;text-transform:uppercase">Live loud.</h1>
+<h1 data-build-in="rise 3 auto" style="position:absolute;left:128px;top:509px;width:900px;font-family:'Oswald', Arial, sans-serif;font-size:200px;font-weight:700;line-height:0.95;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">Live long.</h1>
+<p data-build-in="fade 4 auto" style="position:absolute;left:128px;top:731px;width:820px;font-size:36px;color:#BFC3D1">Five habits that quietly decide how you feel, look and last.</p>
+<aside>Open with energy. The whole talk is about small daily habits, not extreme diets.</aside>
+</section>
+
+<section id="manifesto" data-transition="magic" style="background:#C6FF3D;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:245px 128px 128px;display:flex;flex-direction:column;gap:40px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1560px;top:96px;width:200px;height:200px;background:#0E0F1A"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1640px;top:860px;width:80px;height:80px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;width:1300px">The deal</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:128px;font-weight:700;line-height:1.02;text-transform:uppercase;width:1360px">Your body is the only place you are guaranteed to live.</h2>
+<p data-build-in="rise 1 auto" style="position:absolute;left:128px;top:756px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:500;text-transform:uppercase">So stop treating it like a rental.</p>
+<aside>Pause after the headline. Let it land.</aside>
+</section>
+
+<section id="objectives" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1440px;top:600px;width:320px;height:320px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1380px;top:560px;width:72px;height:72px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Today's lesson</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">By the end, you will be able to</h2>
+<div data-build-in="rise 1 auto" style="position:absolute;left:128px;top:420px;width:1200px;display:flex;gap:40px;align-items:center">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;color:#C6FF3D">01</p>
+<p style="font-size:36px">Define health and a healthy lifestyle (WHO)</p>
+</div>
+<div data-build-in="rise 2 auto" style="position:absolute;left:128px;top:570px;width:1200px;display:flex;gap:40px;align-items:center">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;color:#FF5A36">02</p>
+<p style="font-size:36px">Explain what shapes lifestyle — personal and social factors</p>
+</div>
+<div data-build-in="rise 3 auto" style="position:absolute;left:128px;top:720px;width:1200px;display:flex;gap:40px;align-items:center">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;color:#C6FF3D">03</p>
+<p style="font-size:36px">Apply behaviour-change theory to one of your own habits</p>
+</div>
+<aside>Read the three objectives aloud. Tell students there is a short quiz at the end.</aside>
+</section>
+
+<section id="ch1" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#C6FF3D;opacity:0.22;filter:blur(20px)"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:804px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
+<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
+<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:304px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 01 · The concept</p>
+<h2 id="t-define" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:380px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:140px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">So what IS a healthy lifestyle?</h2>
+<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:714px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">Definitions, evidence and what shapes our choices</p>
+<aside>Chapter 01: the concept. Pause here for a beat before moving on.</aside>
+</section>
+
+<section id="define" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#0E0F1A"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">Key concept</p>
+<h2 id="t-define" style="position:absolute;left:128px;top:191px;width:1500px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">So what IS a healthy lifestyle?</h2>
+<div data-build-in="rise 1 auto" style="position:absolute;left:128px;top:380px;width:808px;background:#FFFFFF;border-left:12px solid #C6FF3D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:600;text-transform:uppercase;color:#5A5E70">Health · WHO Constitution, 1948</p>
+<p style="font-size:34px;line-height:1.35">“A state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.”</p>
+</div>
+<div data-build-in="rise 2 auto" style="position:absolute;left:984px;top:380px;width:808px;background:#FFFFFF;border-left:12px solid #FF5A36;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:600;text-transform:uppercase;color:#5A5E70">Healthy lifestyle · WHO Europe, 1999</p>
+<p style="font-size:34px;line-height:1.35">A way of living that lowers the risk of serious illness and early death — and lets people enjoy more of life.</p>
+</div>
+<p data-build-in="pop 3 auto" style="position:absolute;left:128px;top:770px;width:1664px;font-size:32px;background:#0E0F1A;color:#F4F1EA;padding:28px 40px;border-radius:16px"><span style="color:#C6FF3D"><b>In plain words:</b></span> the daily choices — how you eat, move, sleep, cope and connect — that add up to the person you become.</p>
+<aside>Key point: health is not just "not being sick". It has three dimensions: physical, mental, social. A lifestyle is a pattern of behaviour, not one decision.</aside>
+</section>
+
+<section id="why" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:grid;grid-template-columns:820px 1fr;gap:80px;align-items:center">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:96px;top:200px;width:700px;height:700px;background:#1C1E2E"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:700px;top:180px;width:96px;height:96px;background:#FF5A36"></x-shape>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Why it matters</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:300px;font-weight:700;line-height:1;color:#C6FF3D">75%</p>
+<p style="font-size:32px;color:#BFC3D1">of non-pandemic deaths worldwide in 2021 came from noncommunicable diseases: <b>43 million people</b>. 18 million of them died before age 70.</p>
+<p style="font-size:24px;color:#8B90A6">Source: WHO NCD fact sheet, 2025</p>
+</div>
+<h2 style="position:absolute;left:1028px;top:204px;width:764px;font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.05;text-transform:uppercase">Four behaviours drive the risk</h2>
+<p data-build-in="left 1 auto" style="position:absolute;left:1028px;top:379px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #FF5A36;padding:20px 32px;border-radius:12px">Tobacco use</p>
+<p data-build-in="left 2 auto" style="position:absolute;left:1028px;top:494px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #C6FF3D;padding:20px 32px;border-radius:12px">Unhealthy diet</p>
+<p data-build-in="left 3 auto" style="position:absolute;left:1028px;top:608px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #FF5A36;padding:20px 32px;border-radius:12px">Harmful use of alcohol</p>
+<p data-build-in="left 4 auto" style="position:absolute;left:1028px;top:722px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #C6FF3D;padding:20px 32px;border-radius:12px">Physical inactivity</p>
+<p data-build-in="fade 5 auto" style="position:absolute;left:1028px;top:837px;width:764px;font-size:28px;color:#BFC3D1">All four are <b>lifestyle</b> factors — they can be changed.</p>
+<aside>NCDs = heart disease, cancer, diabetes, chronic lung disease. They are the world's main killers, and lifestyle is the main modifiable risk.</aside>
+</section>
+
+<section id="determinants" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:16px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Theory · Dahlgren &amp; Whitehead (1991)</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1;text-transform:uppercase;width:1300px">Lifestyle is not only a personal choice</h2>
+<svg aria-label="Rainbow model of the determinants of health: five nested layers from age, sex and genes at the core, then individual lifestyle, social and community networks, living and working conditions, and broad socioeconomic, cultural and environmental conditions" data-build-in="scale 1 auto" viewBox="0 0 1200 600" width="1200" height="600" style="position:absolute;left:360px;top:330px;width:1200px;height:600px"><path d="M10 600 A590 590 0 0 1 1190 600 Z" fill="#1F2244"/><path d="M120 600 A480 480 0 0 1 1080 600 Z" fill="#2C2F5A"/><path d="M230 600 A370 370 0 0 1 970 600 Z" fill="#3A3E73"/><path d="M340 600 A260 260 0 0 1 860 600 Z" fill="#C6FF3D"/><path d="M450 600 A150 150 0 0 1 750 600 Z" fill="#FF5A36"/></svg>
+<p data-build-in="fade 2 auto" style="position:absolute;left:560px;top:377px;width:800px;font-family:'Oswald', Arial, sans-serif;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase">Socioeconomic, cultural &amp; environmental</p>
+<p data-build-in="fade 3 auto" style="position:absolute;left:610px;top:487px;width:700px;font-family:'Oswald', Arial, sans-serif;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase">Living &amp; working conditions</p>
+<p data-build-in="fade 4 auto" style="position:absolute;left:660px;top:597px;width:600px;font-family:'Oswald', Arial, sans-serif;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase">Social &amp; community networks</p>
+<p data-build-in="pop 5 auto" style="position:absolute;left:780px;top:708px;width:360px;font-family:'Oswald', Arial, sans-serif;font-size:26px;font-weight:700;text-align:center;text-transform:uppercase;color:#0E0F1A">Individual lifestyle</p>
+<p data-build-in="fade 6 auto" style="position:absolute;left:840px;top:838px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:26px;font-weight:700;line-height:1.15;text-align:center;text-transform:uppercase;color:#0E0F1A">Age, sex<br>&amp; genes</p>
+<aside>The rainbow model: our habits sit inside wider layers. Income, housing, work, culture and community shape what is easy or hard to choose. Link to human development: Bronfenbrenner's ecological systems make the same point.</aside>
+</section>
+
+<section id="ch2" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#FF5A36;opacity:0.22;filter:blur(20px)"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:786px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
+<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
+<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:349px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 02 · The pillars</p>
+<h2 id="t-pillars" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:425px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:220px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">Five pillars</h2>
+<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:696px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">Move · Eat · Sleep · Mind · Cut</p>
+<aside>Chapter 02: the pillars. Pause here for a beat before moving on.</aside>
+</section>
+
+<section id="pillars" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1560px;top:96px;width:200px;height:200px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1480px;top:240px;width:64px;height:64px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">The system</p>
+<h2 id="t-pillars" style="position:absolute;left:128px;top:191px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:112px;font-weight:700;line-height:1;text-transform:uppercase">Five pillars</h2>
+<div data-build-in="pop 1 auto" style="position:absolute;left:128px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#C6FF3D">01</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Move</h3>
+<p style="font-size:28px;color:#BFC3D1">Daily motion, not punishment.</p>
+</div>
+</div>
+<div data-build-in="pop 2 auto" style="position:absolute;left:464px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#FF5A36">02</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Eat</h3>
+<p style="font-size:28px;color:#BFC3D1">Real food, mostly plants.</p>
+</div>
+</div>
+<div data-build-in="pop 3 auto" style="position:absolute;left:800px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#C6FF3D">03</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Sleep</h3>
+<p style="font-size:28px;color:#BFC3D1">The free performance drug.</p>
+</div>
+</div>
+<div data-build-in="pop 4 auto" style="position:absolute;left:1136px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#FF5A36">04</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Mind</h3>
+<p style="font-size:28px;color:#BFC3D1">Calm head, real people.</p>
+</div>
+</div>
+<div data-build-in="pop 5 auto" style="position:absolute;left:1472px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#C6FF3D">05</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Cut</h3>
+<p style="font-size:28px;color:#BFC3D1">Drop what drains you.</p>
+</div>
+</div>
+<aside>Five pillars. Each one gets its own slide next.</aside>
+</section>
+
+<section id="move" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:128px;top:220px;width:640px;height:640px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:660px;top:200px;width:120px;height:120px;background:#FF5A36"></x-shape>
+<p data-build-in="pop 1 auto" style="position:absolute;left:128px;top:339px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:340px;font-weight:700;line-height:1;text-align:center">150</p>
+<p data-build-in="fade 2 auto" style="position:absolute;left:128px;top:679px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;text-transform:uppercase;text-align:center">minutes / week</p>
+<div style="position:absolute;left:944px;top:287px;width:848px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">01 / Move</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Sit less. Move more.</h2>
+<p style="font-size:32px;color:#3A3D4D">The WHO minimum for adults: 150–300 minutes of moderate activity a week, plus strength work twice a week.</p>
+<p style="font-size:32px;color:#3A3D4D"><b>That is just 22 minutes a day.</b> A brisk walk counts.</p>
+</div>
+<aside>150 minutes sounds like a lot. Divide by seven: about 22 minutes a day.</aside>
+</section>
+
+<section id="eat" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:230px;width:48px;height:48px;background:#C6FF3D"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#FF5A36">02 / Eat</p>
+<svg aria-label="Plate split into half vegetables and fruit, a quarter whole grains, a quarter protein" data-build-in="scale 1 auto" viewBox="0 0 600 600" width="600" height="600" style="position:absolute;left:128px;top:300px;width:600px;height:600px"><path d="M300 300 L300 0 A300 300 0 0 0 300 600 Z" fill="#C6FF3D"/><path d="M300 300 L300 0 A300 300 0 0 1 600 300 Z" fill="#FF5A36"/><path d="M300 300 L600 300 A300 300 0 0 1 300 600 Z" fill="#F4F1EA"/><circle cx="300" cy="300" r="296" fill="none" stroke="#0E0F1A" stroke-width="8"/><line x1="300" y1="0" x2="300" y2="600" stroke="#0E0F1A" stroke-width="8"/><line x1="300" y1="300" x2="600" y2="300" stroke="#0E0F1A" stroke-width="8"/></svg>
+<p data-build-in="fade 2 auto" style="position:absolute;left:148px;top:570px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;color:#0E0F1A;text-align:center">VEG + FRUIT</p>
+<p data-build-in="fade 3 auto" style="position:absolute;left:458px;top:420px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;color:#0E0F1A;text-align:center">GRAINS</p>
+<p data-build-in="fade 4 auto" style="position:absolute;left:458px;top:720px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;color:#0E0F1A;text-align:center">PROTEIN</p>
+<div data-build-in="rise 5 auto" style="position:absolute;left:840px;top:300px;width:900px;display:flex;flex-direction:column;gap:32px">
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Build the plate, skip the diet.</h2>
+<p style="font-size:32px;color:#BFC3D1"><span style="color:#C6FF3D">■</span> Half the plate: vegetables and fruit — aim for 5 portions a day.</p>
+<p style="font-size:32px;color:#BFC3D1"><span style="color:#FF5A36">■</span> Water first. Sugary drinks last.</p>
+<p style="font-size:32px;color:#BFC3D1"><span style="color:#F4F1EA">■</span> Cook more. Ultra-processed less.</p>
+</div>
+<aside>Use the plate, not a calorie app. Half veg and fruit, a quarter whole grains, a quarter protein.</aside>
+</section>
+
+<section id="sleep" data-transition="magic" style="background:#12142B;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1380px;top:110px;width:380px;height:380px;background:#F4F1EA"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1290px;top:70px;width:360px;height:360px;background:#12142B"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">03 / Sleep</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:300px;font-weight:700;line-height:1;color:#C6FF3D">7–9</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1;text-transform:uppercase">Hours. Non-negotiable.</h2>
+<p data-build-in="rise 1 auto" style="position:absolute;left:128px;top:846px;width:533px;font-size:30px;background:#1F2244;padding:32px;border-radius:16px">Same wake-up time, every day</p>
+<p data-build-in="rise 2 auto" style="position:absolute;left:693px;top:846px;width:533px;font-size:30px;background:#1F2244;padding:32px;border-radius:16px">Screens off 60 min before bed</p>
+<p data-build-in="rise 3 auto" style="position:absolute;left:1259px;top:846px;width:533px;font-size:30px;background:#1F2244;padding:32px;border-radius:16px">Cool, dark, quiet room</p>
+<aside>Adults need 7 to 9 hours. Consistency of wake-up time matters more than bedtime.</aside>
+</section>
+
+<section id="mind" data-transition="magic" style="background:#FF5A36;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1440px;top:540px;width:360px;height:360px;background:#0E0F1A"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1380px;top:480px;width:96px;height:96px;background:#C6FF3D"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase">04 / Mind</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:136px;font-weight:700;line-height:1;text-transform:uppercase;width:1240px">Stress is a signal. Not a lifestyle.</h2>
+<p data-build-in="left 1 auto" style="position:absolute;left:128px;top:640px;width:1200px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;text-transform:uppercase">01 · Breathe slowly for 2 minutes</p>
+<p data-build-in="left 2 auto" style="position:absolute;left:128px;top:720px;width:1200px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;text-transform:uppercase">02 · Get outside, daylight, 20 minutes</p>
+<p data-build-in="left 3 auto" style="position:absolute;left:128px;top:800px;width:1200px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;text-transform:uppercase">03 · Talk to a real human, not a feed</p>
+<aside>Mental health is a pillar, not an extra. People and nature are the cheapest medicine.</aside>
+</section>
+
+<section id="cut" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1520px;top:680px;width:240px;height:240px;background:#FF5A36"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1600px;top:120px;width:80px;height:80px;background:#C6FF3D"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">05 / Cut</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Cut the noise</h2>
+<p data-build-in="right 1 auto" style="position:absolute;left:128px;top:400px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Smoking</p>
+<p data-build-in="right 2 auto" style="position:absolute;left:128px;top:520px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Excess alcohol</p>
+<p data-build-in="right 3 auto" style="position:absolute;left:128px;top:640px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Sitting all day</p>
+<p data-build-in="right 4 auto" style="position:absolute;left:128px;top:760px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Scrolling at 1 AM</p>
+<aside>Healthy living is also about subtraction. Pick one of these to cut first.</aside>
+</section>
+
+<section id="ch3" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#C6FF3D;opacity:0.22;filter:blur(20px)"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:741px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
+<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
+<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:392px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 03 · Human development</p>
+<h2 id="t-lifespan" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:468px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:136px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">Why your twenties matter</h2>
+<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:651px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">Life stage, behaviour change and how habits form</p>
+<aside>Chapter 03: human development. Pause here for a beat before moving on.</aside>
+</section>
+
+<section id="lifespan" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">Human development lens</p>
+<h2 id="t-lifespan" style="position:absolute;left:128px;top:191px;width:1400px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Why your twenties matter</h2>
+<p data-build-in="rise 1 auto" style="position:absolute;left:128px;top:450px;width:326px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">CHILDHOOD 0–12</p>
+<p data-build-in="rise 2 auto" style="position:absolute;left:462px;top:450px;width:261px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">TEENS 12–18</p>
+<p data-build-in="pop 3 auto" style="position:absolute;left:731px;top:450px;width:359px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;background:#C6FF3D;border-radius:12px;padding:28px;box-shadow:0 12px 32px rgba(14,15,26,0.25)">EMERGING ADULT 18–25</p>
+<p data-build-in="rise 4 auto" style="position:absolute;left:1098px;top:450px;width:424px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">ADULTHOOD 25–65</p>
+<p data-build-in="rise 5 auto" style="position:absolute;left:1530px;top:450px;width:262px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">LATER LIFE 65+</p>
+<p data-build-in="drop 6 auto" style="position:absolute;left:790px;top:372px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:24px;font-weight:700;letter-spacing:2px;text-align:center;background:#0E0F1A;color:#C6FF3D;border-radius:999px;padding:6px 16px">YOU ARE HERE ↓</p>
+<div data-build-in="rise 7 auto" style="position:absolute;left:128px;top:660px;width:528px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C2361A">A new life stage</h3>
+<p style="font-size:30px;color:#3A3D4D">Arnett (2000) named 18–25 “emerging adulthood”: a time of exploration and instability.</p>
+</div>
+<div data-build-in="rise 8 auto" style="position:absolute;left:696px;top:660px;width:528px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C2361A">First real control</h3>
+<p style="font-size:30px;color:#3A3D4D">For many, the first years of choosing your own food, sleep, money and substances.</p>
+</div>
+<div data-build-in="rise 9 auto" style="position:absolute;left:1264px;top:660px;width:528px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C2361A">Habits that stick</h3>
+<p style="font-size:30px;color:#3A3D4D">Patterns set in this window often carry into adulthood — a key time to intervene (Nelson et al., 2008).</p>
+</div>
+<aside>Ask: who here cooks for themselves now? Who sleeps less than at school? University is exactly the stage where lifestyle gets "locked in".</aside>
+</section>
+
+<section id="change" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:16px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#C6FF3D"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Theory · Prochaska &amp; DiClemente (1983)</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1;text-transform:uppercase;width:1300px">Change happens in stages</h2>
+<div data-build-in="rise 1 auto" style="position:absolute;left:128px;top:720px;width:312px;height:200px;background:#1C1E2E;border-top:8px solid #8B90A6;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Precontemplation</h3>
+<p style="font-size:24px;color:#BFC3D1">“I don't see a problem.”</p>
+</div>
+<div data-build-in="rise 2 auto" style="position:absolute;left:464px;top:640px;width:312px;height:280px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Contemplation</h3>
+<p style="font-size:24px;color:#BFC3D1">“Maybe I should…”</p>
+</div>
+<div data-build-in="rise 3 auto" style="position:absolute;left:800px;top:560px;width:312px;height:360px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Preparation</h3>
+<p style="font-size:24px;color:#BFC3D1">“I start next Monday.” A concrete plan.</p>
+</div>
+<div data-build-in="rise 4 auto" style="position:absolute;left:1136px;top:480px;width:312px;height:440px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Action</h3>
+<p style="font-size:24px;color:#BFC3D1">Doing it, for less than 6 months.</p>
+</div>
+<div data-build-in="rise 5 auto" style="position:absolute;left:1472px;top:400px;width:312px;height:520px;background:#C6FF3D;border-top:8px solid #C6FF3D;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase;color:#0E0F1A">Maintenance</h3>
+<p style="font-size:24px;color:#0E0F1A">6+ months. It's now part of who you are.</p>
+</div>
+<aside>The Transtheoretical Model. People move up and down these steps; relapse is normal, not failure. Different stages need different help: information early, planning in the middle, support at the end.</aside>
+</section>
+
+<section id="habit" data-transition="magic" style="background:#C6FF3D;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:28px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:128px;top:220px;width:640px;height:640px;background:#0E0F1A"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:680px;top:200px;width:110px;height:110px;background:#FF5A36"></x-shape>
+<p data-build-in="pop 1 auto" style="position:absolute;left:128px;top:329px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:360px;font-weight:700;line-height:1;color:#C6FF3D;text-align:center">66</p>
+<p data-build-in="fade 2 auto" style="position:absolute;left:128px;top:689px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F4F1EA;text-align:center">DAYS</p>
+<div style="position:absolute;left:968px;top:281px;width:824px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase">Research · Lally et al. (2010)</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1;text-transform:uppercase">Habits take longer than 21 days</h2>
+<p style="font-size:32px">The median time for a new daily behaviour to feel automatic — with a range of <b>18 to 254 days</b>.</p>
+<p style="font-size:32px">Missing a single day did not ruin the process.</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:700;text-transform:uppercase">Consistency beats intensity.</p>
+</div>
+<aside>The "21 days" idea is a myth. 96 participants built habits like drinking water or a short run; it took a median of 66 days. Be patient with yourself.</aside>
+</section>
+
+<section id="ch4" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#FF5A36;opacity:0.22;filter:blur(20px)"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:736px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
+<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
+<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:396px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 04 · Put it to work</p>
+<h2 id="t-blueprint" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:472px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:128px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">One ordinary, powerful day</h2>
+<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:646px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">A routine, a class activity and a debate</p>
+<aside>Chapter 04: put it to work. Pause here for a beat before moving on.</aside>
+</section>
+
+<section id="blueprint" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">The blueprint</p>
+<h2 id="t-blueprint" style="position:absolute;left:128px;top:191px;width:1400px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">One ordinary, powerful day</h2>
+<hr style="position:absolute;left:128px;top:540px;width:1664px;border-top:4px solid #3A3D55">
+<x-shape kind="ellipse" data-build-in="pop 1 auto" style="position:absolute;left:250px;top:526px;width:32px;height:32px;background:#C6FF3D"></x-shape>
+<p data-build-in="rise 1 auto" style="position:absolute;left:136px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#C6FF3D;text-align:center">07:00</p>
+<p data-build-in="rise 1 auto" style="position:absolute;left:136px;top:590px;width:260px;font-size:28px;text-align:center">Wake up + a glass of water</p>
+<x-shape kind="ellipse" data-build-in="pop 2 auto" style="position:absolute;left:527px;top:526px;width:32px;height:32px;background:#FF5A36"></x-shape>
+<p data-build-in="rise 2 auto" style="position:absolute;left:413px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#FF5A36;text-align:center">08:00</p>
+<p data-build-in="rise 2 auto" style="position:absolute;left:413px;top:590px;width:260px;font-size:28px;text-align:center">Breakfast with protein</p>
+<x-shape kind="ellipse" data-build-in="pop 3 auto" style="position:absolute;left:804px;top:526px;width:32px;height:32px;background:#C6FF3D"></x-shape>
+<p data-build-in="rise 3 auto" style="position:absolute;left:690px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#C6FF3D;text-align:center">12:30</p>
+<p data-build-in="rise 3 auto" style="position:absolute;left:690px;top:590px;width:260px;font-size:28px;text-align:center">10-minute walk after lunch</p>
+<x-shape kind="ellipse" data-build-in="pop 4 auto" style="position:absolute;left:1081px;top:526px;width:32px;height:32px;background:#FF5A36"></x-shape>
+<p data-build-in="rise 4 auto" style="position:absolute;left:967px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#FF5A36;text-align:center">18:00</p>
+<p data-build-in="rise 4 auto" style="position:absolute;left:967px;top:590px;width:260px;font-size:28px;text-align:center">30 minutes of real movement</p>
+<x-shape kind="ellipse" data-build-in="pop 5 auto" style="position:absolute;left:1358px;top:526px;width:32px;height:32px;background:#C6FF3D"></x-shape>
+<p data-build-in="rise 5 auto" style="position:absolute;left:1244px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#C6FF3D;text-align:center">21:30</p>
+<p data-build-in="rise 5 auto" style="position:absolute;left:1244px;top:590px;width:260px;font-size:28px;text-align:center">Screens off, lights low</p>
+<x-shape kind="ellipse" data-build-in="pop 6 auto" style="position:absolute;left:1635px;top:526px;width:32px;height:32px;background:#FF5A36"></x-shape>
+<p data-build-in="rise 6 auto" style="position:absolute;left:1521px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#FF5A36;text-align:center">23:00</p>
+<p data-build-in="rise 6 auto" style="position:absolute;left:1521px;top:590px;width:260px;font-size:28px;text-align:center">Sleep. Repeat tomorrow.</p>
+<p style="position:absolute;left:128px;top:820px;width:1664px;font-size:32px;color:#BFC3D1">Nothing extreme. Just the five pillars, scheduled.</p>
+<aside>Walk the audience through the day left to right.</aside>
+</section>
+
+<section id="activity" data-transition="magic" style="background:#12142B;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1420px;top:110px;width:340px;height:340px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1360px;top:380px;width:80px;height:80px;background:#FF5A36"></x-shape>
+<p style="position:absolute;left:1420px;top:220px;width:340px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;color:#0E0F1A;text-align:center">10 MIN</p>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Class activity</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase;width:1240px">Your turn: audit your day</h2>
+<div data-build-in="rise 1" style="position:absolute;left:128px;top:560px;width:528px;height:300px;background:#1F2244;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C6FF3D">1 · Map it</h3>
+<p style="font-size:28px">Write down yesterday, hour by hour. (3 min)</p>
+</div>
+<div data-build-in="rise 2" style="position:absolute;left:696px;top:560px;width:528px;height:300px;background:#1F2244;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#FF5A36">2 · Score it</h3>
+<p style="font-size:28px">Mark each of the 5 pillars: hit or miss. (3 min)</p>
+</div>
+<div data-build-in="rise 3" style="position:absolute;left:1264px;top:560px;width:528px;height:300px;background:#1F2244;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C6FF3D">3 · Share it</h3>
+<p style="font-size:28px">Pick ONE habit. Name your stage of change. Tell your neighbour. (4 min)</p>
+</div>
+<aside>Click to reveal each step. Give students paper or let them use their phones. Ask 2–3 volunteers to share their one habit.</aside>
+</section>
+
+<section id="debate" data-transition="magic" style="background:#12142B;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#C6FF3D"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Discussion · 5 min in pairs</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.05;text-transform:uppercase;width:1350px">Healthy lifestyle: personal choice or social privilege?</h2>
+<div data-build-in="left 1 auto" style="position:absolute;left:128px;top:460px;width:812px;height:300px;background:#1F2244;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;text-transform:uppercase;color:#C6FF3D">Choice</h3>
+<p style="font-size:32px;color:#BFC3D1">Walking, sleep and water cost nothing. Daily decisions are ours to make.</p>
+</div>
+<div data-build-in="right 2 auto" style="position:absolute;left:980px;top:460px;width:812px;height:300px;background:#1F2244;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;text-transform:uppercase;color:#FF5A36">Privilege</h3>
+<p style="font-size:32px;color:#BFC3D1">Income, food prices, work hours, air quality and safe streets limit what is possible.</p>
+</div>
+<x-shape kind="ellipse" data-build-in="pop 3 auto" style="position:absolute;left:910px;top:560px;width:100px;height:100px;background:#F4F1EA"></x-shape>
+<p data-build-in="pop 3 auto" style="position:absolute;left:910px;top:583px;width:100px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;color:#12142B">VS</p>
+<p data-build-in="fade 4 auto" style="position:absolute;left:128px;top:820px;width:1664px;font-size:32px;color:#C6FF3D">Use the rainbow model: which layers make it easier — or harder — for you?</p>
+<aside>No right answer. Push students to use the rainbow model. In Ulaanbaatar: think of winter air pollution and how it limits outdoor exercise.</aside>
+</section>
+
+<section id="quiz" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#C6FF3D"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">Quick check</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Pop quiz</h2>
+<p style="position:absolute;left:128px;top:376px;width:1100px;font-size:36px;font-weight:600">1. WHO defines health as well-being in which three areas?</p>
+<p data-build-in="pop 1" style="position:absolute;left:1300px;top:360px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">PHYSICAL · MENTAL · SOCIAL</p>
+<p style="position:absolute;left:128px;top:516px;width:1100px;font-size:36px;font-weight:600">2. What share of non-pandemic deaths are caused by NCDs?</p>
+<p data-build-in="pop 2" style="position:absolute;left:1300px;top:500px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">ABOUT 75%</p>
+<p style="position:absolute;left:128px;top:656px;width:1100px;font-size:36px;font-weight:600">3. Weekly activity minimum for adults (WHO)?</p>
+<p data-build-in="pop 3" style="position:absolute;left:1300px;top:640px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">150 MINUTES</p>
+<p style="position:absolute;left:128px;top:796px;width:1100px;font-size:36px;font-weight:600">4. Median days for a habit to become automatic?</p>
+<p data-build-in="pop 4" style="position:absolute;left:1300px;top:780px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">66 DAYS</p>
+<aside>Ask the class first, then click to reveal each answer. Bonus question: name the stage of change where someone "plans to start next Monday" (Preparation).</aside>
+</section>
+
+<section id="close" data-transition="magic" style="background:#C6FF3D;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1140px;top:200px;width:660px;height:660px;background:#0E0F1A"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1080px;top:760px;width:140px;height:140px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;width:960px">Not Monday. Not January.</p>
+<h1 style="font-family:'Oswald', Arial, sans-serif;font-size:240px;font-weight:700;line-height:0.95;text-transform:uppercase;width:960px">Start today.</h1>
+<p style="font-size:36px;width:920px">One walk. One glass of water. One early night.</p>
+<p data-build-in="pop 1 auto" style="position:absolute;left:1240px;top:492px;width:460px;font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;color:#C6FF3D;text-align:center;text-transform:uppercase">Thank you</p>
+<aside>End on the call to action. Ask everyone to pick one habit tonight.</aside>
+</section>
+
+<section id="sources" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:14px">
+<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
+<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
+<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">References</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1;text-transform:uppercase">Sources</h2>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Arnett, J. J. (2000). Emerging adulthood. <i>American Psychologist, 55</i>(5), 469–480.</p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Dahlgren, G., &amp; Whitehead, M. (1991). <i>Policies and strategies to promote social equity in health.</i> Institute for Futures Studies.</p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Harvard T.H. Chan School of Public Health. <i>Healthy Eating Plate.</i></p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Lally, P., et al. (2010). How are habits formed? <i>European Journal of Social Psychology, 40</i>(6), 998–1009.</p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Nelson, M. C., et al. (2008). Emerging adulthood and college-aged youth. <i>Obesity, 16</i>(10), 2205–2211.</p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Prochaska, J. O., &amp; DiClemente, C. C. (1983). Stages and processes of self-change of smoking. <i>J. Consulting &amp; Clinical Psychology, 51</i>(3), 390–395.</p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">Watson, N. F., et al. (2015). Recommended amount of sleep for a healthy adult. <i>Sleep, 38</i>(6), 843–844.</p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">World Health Organization. (1948). <i>Constitution of the World Health Organization.</i></p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">WHO Regional Office for Europe. (1999). <i>Healthy living: What is a healthy lifestyle?</i></p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">World Health Organization. (2020). <i>Guidelines on physical activity and sedentary behaviour.</i></p>
+<p style="font-size:24px;color:#BFC3D1;width:1440px">World Health Organization. (2025). <i>Noncommunicable diseases</i> — fact sheet.</p>
+<aside>Leave this up during questions.</aside>
+</section>
+
+</div>
+<div id="ui"><div id="bar"></div></div>
+<div id="hud"><span id="count"></span><button id="bn" title="Speaker notes (N)">Notes</button><button id="bf" title="Fullscreen (F)">Fullscreen</button></div>
+<div id="notes"></div>
+<div id="help">→ / Space / click: next &nbsp;·&nbsp; ← : back &nbsp;·&nbsp; F: fullscreen &nbsp;·&nbsp; N: notes</div>
+<script>
+(() => {
+const stage = document.getElementById('stage');
+const S = [...stage.querySelectorAll(':scope > section')];
+const EASE = 'cubic-bezier(.65,0,.35,1)';
+const OUT = 'cubic-bezier(.2,.8,.2,1)';
+let cur = -1, steps = [], stepIx = 0, timers = [], busy = false;
+
+function fit() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `scale(${k}) translate(-50%, -50%)`;
+}
+addEventListener('resize', fit); fit();
+
+const KF = {
+  fade: [{opacity:0},{opacity:1}],
+  rise: [{opacity:0,translate:'0 48px'},{opacity:1,translate:'0 0'}],
+  drop: [{opacity:0,translate:'0 -48px'},{opacity:1,translate:'0 0'}],
+  left: [{opacity:0,translate:'-96px 0'},{opacity:1,translate:'0 0'}],
+  right:[{opacity:0,translate:'96px 0'},{opacity:1,translate:'0 0'}],
+  scale:[{opacity:0,scale:'0.82'},{opacity:1,scale:'1'}],
+  pop:  [{opacity:0,scale:'0.55'},{opacity:1,scale:'1.07',offset:.7},{opacity:1,scale:'1'}]
+};
+function parse(el) {
+  const t = (el.dataset.buildIn || '').trim().split(/\s+/);
+  return {el, type: KF[t[0]] ? t[0] : 'fade', order: parseInt(t[1]) || 1, auto: t.includes('auto')};
+}
+function buildSteps(sec) {
+  const items = [...sec.querySelectorAll('[data-build-in]')].map(parse).sort((a,b) => a.order - b.order);
+  const groups = [];
+  for (const it of items) {
+    let g = groups.find(g => g.order === it.order);
+    if (!g) groups.push(g = {order: it.order, items: [], auto: true});
+    g.items.push(it.el); if (!it.auto) g.auto = false; g.type = g.type || it.type;
+    it.el._type = it.type;
+  }
+  return groups;
+}
+function play(g) {
+  g.items.forEach(el => {
+    el.classList.remove('pending');
+    el.animate(KF[el._type], {duration: el._type === 'pop' ? 650 : 750, easing: OUT, fill: 'backwards'});
+  });
+}
+function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+function runAuto(delay) {
+  clearTimers();
+  let t = delay;
+  while (stepIx < steps.length && steps[stepIx].auto) {
+    const g = steps[stepIx++];
+    timers.push(setTimeout(() => play(g), t));
+    t += 420;
+  }
+}
+function showAll(sec) { sec.querySelectorAll('[data-build-in]').forEach(el => el.classList.remove('pending')); }
+
+function rectOf(el) {
+  const cs = getComputedStyle(el);
+  return {left: el.offsetLeft + 'px', top: el.offsetTop + 'px', width: el.offsetWidth + 'px', height: el.offsetHeight + 'px',
+          backgroundColor: cs.backgroundColor, opacity: cs.opacity, filter: cs.filter === 'none' ? 'blur(0px)' : cs.filter,
+          color: cs.color, fontSize: cs.fontSize, letterSpacing: cs.letterSpacing, textShadow: cs.textShadow};
+}
+
+function go(n, instant) {
+  if (n < 0 || n >= S.length || n === cur || busy) return;
+  clearTimers();
+  const A = S[cur], B = S[n], forward = n > cur;
+  B.querySelectorAll('[data-build-in]').forEach(el => el.classList.add('pending'));
+  steps = buildSteps(B); stepIx = 0;
+  if (!forward) { showAll(B); stepIx = steps.length; }
+  if (!A || instant) {
+    S.forEach(s => s.classList.remove('on')); B.classList.add('on'); B.style.zIndex = 1;
+    cur = n; update(); runAuto(250); return;
+  }
+  busy = true;
+  const magic = (forward ? A : B).dataset.transition === 'magic';
+  const D = 1100;
+  // collect morphing pairs
+  const pairs = [];
+  if (magic) B.querySelectorAll('[id]').forEach(b => {
+    const a = A.querySelector('#' + CSS.escape(b.id)); if (a) pairs.push([a, b]);
+  });
+  const from = pairs.map(([a]) => rectOf(a));
+  const pairedA = new Set(pairs.map(p => p[0])), pairedB = new Set(pairs.map(p => p[1]));
+  // 1. fade out A's own content
+  const aKids = [...A.children].filter(c => !pairedA.has(c));
+  aKids.forEach(c => c.animate([{opacity: getComputedStyle(c).opacity},{opacity:0}], {duration: 280, easing: 'ease-in', fill: 'forwards'}));
+  setTimeout(() => {
+    B.classList.add('on'); B.style.zIndex = 2; A.style.zIndex = 1;
+    const bgA = getComputedStyle(A).backgroundColor, bgB = getComputedStyle(B).backgroundColor;
+    B.animate([{backgroundColor: bgA},{backgroundColor: bgB}], {duration: D, easing: EASE});
+    pairs.forEach(([a, b], i) => {
+      const to = rectOf(b), f = from[i];
+      b.animate([f, to], {duration: D, easing: EASE});
+    });
+    if (!magic) B.animate([{opacity:0},{opacity:1}], {duration: 600, easing: 'ease-out'});
+    [...B.children].filter(c => !pairedB.has(c) && !c.hasAttribute('data-build-in') && c.tagName !== 'ASIDE')
+      .forEach(c => c.animate([{opacity:0, translate:'0 24px'},{opacity:1, translate:'0 0'}], {duration: 700, delay: magic ? 380 : 120, easing: OUT, fill: 'backwards'}));
+    setTimeout(() => {
+      A.classList.remove('on'); A.style.zIndex = '';
+      A.getAnimations({subtree: true}).forEach(x => x.cancel());
+      busy = false;
+    }, D + 40);
+    cur = n; update(); runAuto(magic ? 650 : 400);
+  }, 260);
+}
+function next() {
+  if (stepIx < steps.length) { clearTimers(); const g = steps[stepIx++]; play(g); runAuto(420); return; }
+  if (!busy) go(cur + 1);
+}
+function prev() { if (!busy) go(cur - 1); }
+function update() {
+  document.getElementById('bar').style.width = ((cur + 1) / S.length * 100) + '%';
+  document.getElementById('count').textContent = (cur + 1) + ' / ' + S.length;
+  const a = S[cur].querySelector('aside'); document.getElementById('notes').textContent = a ? a.textContent : '';
+  history.replaceState(null, '', '#' + (cur + 1));
+}
+const notes = document.getElementById('notes');
+function toggleNotes() { notes.style.display = notes.style.display === 'block' ? 'none' : 'block'; }
+function fs() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
+addEventListener('keydown', e => {
+  if (['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+  else if (e.key === 'Home') go(0, true); else if (e.key === 'End') go(S.length - 1, true);
+  else if (e.key === 'f' || e.key === 'F') fs(); else if (e.key === 'n' || e.key === 'N') toggleNotes();
+});
+document.addEventListener('click', e => {
+  if (e.target.closest('#hud,#notes')) return;
+  e.clientX < innerWidth * 0.3 ? prev() : next();
+});
+let tx = null;
+addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive: true});
+addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) dx < 0 ? next() : prev(); tx = null; });
+document.getElementById('bf').onclick = fs;
+document.getElementById('bn').onclick = toggleNotes;
+setTimeout(() => document.getElementById('help').style.opacity = 0, 4000);
+const start = Math.max(0, Math.min(S.length - 1, (parseInt(location.hash.slice(1)) || 1) - 1));
+Promise.all([document.fonts.load('700 40px Oswald'), document.fonts.load('400 20px "DM Sans"')]).catch(()=>{}).then(() => go(start, true));
+})();
+</script>
+</body>
+</html>
