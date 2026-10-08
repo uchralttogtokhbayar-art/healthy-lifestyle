@@ -4,607 +4,627 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Healthy Lifestyle — Human Development</title>
-<meta name="description" content="A university lesson on healthy lifestyle: definitions, evidence, five pillars, behaviour change and habits.">
-<link rel="preload" href="fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="description" content="A cinematic university lesson on healthy lifestyle: definitions, evidence, the five pillars, behaviour change and habits.">
+<meta name="theme-color" content="#06070B">
+<link rel="preload" href="fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:'Oswald';src:url(fonts/oswald.woff2) format('woff2');font-weight:200 700;font-display:block}
-@font-face{font-family:'DM Sans';src:url(fonts/dm-sans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:block}
-@font-face{font-family:'DM Sans';src:url(fonts/dm-sans-italic.woff2) format('woff2');font-weight:100 1000;font-style:italic;font-display:block}
+@font-face{font-family:'Inter Tight';src:url(fonts/inter-tight.woff2) format('woff2');font-weight:100 900;font-display:block}
+@font-face{font-family:'JetBrains Mono';src:url(fonts/jetbrains-mono.woff2) format('woff2');font-weight:100 800;font-display:block}
+:root{--ink:#06070B;--paper:#F2EFE8;--mute:#8B90A0;--dim:#4A4F5E;--lime:#C6FF3D;--coral:#FF5A36;--line:rgba(242,239,232,.14)}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#030308;overflow:hidden;font-family:'DM Sans',Arial,sans-serif}
-#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
-section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;visibility:hidden}
-section.on{visibility:visible}
-section>*:not([style*=absolute]){position:relative}
-x-shape{display:block}
-x-shape[kind=ellipse]{border-radius:50%}
-hr{border:none}
-h1{font-size:96px;font-weight:600;line-height:1.1}
-h2{font-size:64px;font-weight:600;line-height:1.15}
-h3{font-size:44px;font-weight:600;line-height:1.2}
-p{line-height:1.4}
-aside{display:none}
-.pending{opacity:0}
-#ui{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08);z-index:10}
-#bar{height:100%;width:0;background:#C6FF3D;transition:width .5s cubic-bezier(.2,.8,.2,1)}
-#hud{position:fixed;right:16px;bottom:14px;z-index:10;color:#BFC3D1;font:600 13px 'DM Sans',sans-serif;letter-spacing:1px;opacity:0;transition:opacity .3s;display:flex;gap:8px;align-items:center}
-body:hover #hud{opacity:1}
-#hud button{background:rgba(255,255,255,.1);color:#F4F1EA;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}
-#notes{position:fixed;left:16px;right:16px;bottom:24px;max-width:900px;margin:0 auto;background:rgba(14,15,26,.94);color:#F4F1EA;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px 20px;font:16px/1.5 'DM Sans',sans-serif;z-index:11;display:none}
-#help{position:fixed;left:50%;top:24px;transform:translateX(-50%);background:rgba(14,15,26,.9);color:#BFC3D1;border-radius:999px;padding:8px 18px;font:13px 'DM Sans',sans-serif;z-index:11;transition:opacity .6s;pointer-events:none}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body.nogl{background:radial-gradient(ellipse at 70% 40%,#1a1d2b 0%,var(--ink) 60%)}
+#world{position:fixed;inset:0;width:100%;height:100%;display:block}
+#vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 45%,rgba(6,7,11,.9) 100%)}
+#grain{position:fixed;inset:-50%;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");animation:gr 1s steps(4) infinite}
+@keyframes gr{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%}
+.scene{position:absolute;inset:0;visibility:hidden;will-change:transform,opacity,filter}
+.scene.on{visibility:visible}
+.abs{position:absolute}
+svg{overflow:visible;display:block}
+.k{font:500 20px/1 'JetBrains Mono',monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);white-space:nowrap}
+.mono{font:400 20px/1.5 'JetBrains Mono',monospace;color:var(--mute)}
+.num{font-variant-numeric:tabular-nums}
+.d1{font-weight:650;font-size:210px;line-height:.9;letter-spacing:-.055em}
+.h1{font-weight:620;font-size:150px;line-height:1.02;letter-spacing:-.05em}
+.h2{font-weight:600;font-size:100px;line-height:1.06;letter-spacing:-.04em}
+.h3{font-weight:600;font-size:76px;line-height:1.05;letter-spacing:-.035em}
+.b{font-size:32px;line-height:1.42;color:var(--mute)}
+.tag{font-size:44px;font-weight:550;color:var(--lime);letter-spacing:-.01em}
+.meta{font-size:18px;letter-spacing:.08em}
+.gl{top:0;width:1px;height:1080px;background:var(--line)}
+.big{right:90px;top:120px;font-weight:700;font-size:760px;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px rgba(198,255,61,.42)}
+.row .n,.hb .n,.act .n{font-size:24px}
+.row .t{font-size:46px;line-height:1.2;font-weight:500}
+.q{font-size:40px;line-height:1.35;font-weight:300}
+.pctw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.pct{font-weight:650;font-size:170px;line-height:1;letter-spacing:-.055em}
+.lead{font-size:38px;line-height:1.35}
+.st .sn{font-weight:650;font-size:110px;line-height:1;letter-spacing:-.05em}
+.bh .t{font-size:34px;font-weight:500;padding-top:16px}
+.bignum{font-weight:650;font-size:300px;line-height:.9;letter-spacing:-.06em;color:var(--lime)}
+.lg{display:flex;align-items:center;gap:28px}
+.lg i{width:56px;height:8px;flex:none}
+.lg .pc{font:500 30px 'JetBrains Mono',monospace;width:110px;color:var(--paper)}
+.lg .lt{font-size:46px;font-weight:600;letter-spacing:-.02em}
+.tip{font-size:22px;color:var(--paper)}
+.dialn{text-align:center}
+.dialn .num{font-weight:650;font-size:150px;line-height:1;letter-spacing:-.055em;color:var(--lime)}
+.hb .t,.act .t{font-size:42px;font-weight:600;letter-spacing:-.02em}
+.act .d{font-size:26px;line-height:1.4;color:var(--mute)}
+.breath i{position:absolute;border-radius:50%}
+.breath .ring{border:1px solid rgba(242,239,232,.22)}
+.breath .r1{inset:0}.breath .r2{inset:12%}.breath .r3{inset:24%;border-color:rgba(198,255,61,.35)}
+.breath .core{inset:12%;background:radial-gradient(circle,rgba(198,255,61,.95) 0%,rgba(198,255,61,.55) 55%,rgba(198,255,61,0) 72%)}
+.breath .bt{position:absolute;left:0;right:0;bottom:-74px;text-align:center;font:500 22px 'JetBrains Mono',monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--lime)}
+.cn{width:180px;text-align:center;font-size:24px}
+.cd{text-align:center;font-size:24px;line-height:1.35;color:var(--mute)}
+.cl{text-align:center;font-size:46px;font-weight:620;letter-spacing:-.03em}
+.w{white-space:nowrap}
+.w .wt{font-weight:620;font-size:116px;line-height:1;letter-spacing:-.045em;display:inline-block}
+.w .strike{position:absolute;left:-8px;right:-8px;top:52%;height:8px;background:var(--coral);transform-origin:0 50%}
+.sub{font-size:60px}
+.lax{height:2px;background:rgba(242,239,232,.5)}
+.ltk{width:1px;height:14px;background:rgba(242,239,232,.5)}
+.ltl{width:60px;margin-left:-30px;text-align:center;font-size:18px}
+.lband{border:1px solid rgba(242,239,232,.28);display:flex;flex-direction:column;justify-content:center;padding:0 16px;overflow:hidden;white-space:nowrap}
+.lband b{font-size:26px;font-weight:600}
+.lband span{font:400 18px 'JetBrains Mono',monospace;color:var(--mute)}
+.lband.hot{background:var(--lime);border-color:var(--lime)}
+.lband.hot b,.lband.hot span{color:var(--ink)}
+.here{top:400px;padding:8px 18px;border-radius:999px;background:var(--paper);color:var(--ink);font-size:18px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.herel{top:446px;width:2px;height:54px;background:var(--paper)}
+.tk b{display:block;font-size:34px;font-weight:600;color:var(--lime);margin-bottom:12px;letter-spacing:-.02em}
+.tk span{display:block;font-size:26px;line-height:1.42;color:var(--mute)}
+.stl b{display:block;font-size:30px;font-weight:600;letter-spacing:-.02em}
+.stl span{display:block;font-size:22px;color:var(--mute);margin-top:4px}
+.h66{text-align:right}
+.h66 .num{font-weight:650;font-size:170px;line-height:.95;letter-spacing:-.06em;color:var(--coral)}
+.xr{padding:8px 14px;background:rgba(6,7,11,.85);border:1px solid var(--line);color:var(--paper);font-size:18px;white-space:nowrap;pointer-events:none;opacity:0}
+.hit{cursor:crosshair}
+.foot{font-size:18px}
+.evd{width:18px;height:18px;border-radius:50%}
+.evl{width:1px;background:rgba(242,239,232,.3)}
+.evt{font-size:28px;font-weight:600;text-align:center}
+.evx{font-size:25px;line-height:1.3;text-align:center}
+.sun{left:127px;top:547px;width:26px;height:26px;border-radius:50%;background:var(--lime);box-shadow:0 0 30px 8px rgba(198,255,61,.55)}
+.tagl{font-size:60px}
+.timer{font:300 140px/1 'JetBrains Mono',monospace;text-align:center;letter-spacing:-.04em;color:var(--paper)}
+.tbtn{background:var(--lime);color:var(--ink);border:0;border-radius:999px;padding:16px 0;font-size:22px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.tbtn:hover{background:var(--paper)}
+.beam i{display:block;height:3px;background:rgba(242,239,232,.6)}
+.piv{width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-bottom:24px solid var(--paper)}
+.sw{font-weight:650;font-size:150px;line-height:1;letter-spacing:-.055em}
+.side p{font-size:32px;line-height:1.42;color:var(--mute);margin-top:30px;width:720px}
+.side.r{text-align:left}
+.prm{font-size:24px}
+.qr .n{font-size:24px;color:var(--lime)}
+.qq{font-size:38px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+.qa .qm{position:absolute;left:0;top:0;font-size:44px;color:var(--dim)}
+.qa .qv{position:absolute;left:0;top:0;font-size:46px;font-weight:650;color:var(--lime);letter-spacing:-.02em;white-space:nowrap;opacity:0}
+.refs p{font-size:24px;line-height:1.4;color:var(--mute);margin-bottom:14px}
+.refs i{color:var(--paper);font-style:italic}
+/* chrome */
+#chrome{position:absolute;inset:0;pointer-events:none}
+#brand{left:140px;top:58px;font-size:16px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper)}
+#brand span{color:var(--dim)}
+#chap{right:140px;top:58px;font-size:16px;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);text-align:right}
+#trk{left:140px;top:1024px;width:1640px;height:1px;background:var(--line)}
+#fill{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--lime)}
+#trk i{position:absolute;top:-5px;width:1px;height:11px;background:rgba(242,239,232,.4)}
+#cnt{right:140px;top:990px;font-size:16px;letter-spacing:.2em;color:var(--paper)}
+#help{left:140px;top:990px;font-size:16px;letter-spacing:.1em;color:var(--dim)}
+#notes{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);width:min(900px,calc(100% - 32px));background:rgba(6,7,11,.94);border:1px solid var(--line);color:var(--paper);font:400 16px/1.55 'Inter Tight',sans-serif;padding:16px 20px;border-radius:10px;display:none;z-index:5}
+#notes b{font:500 12px 'JetBrains Mono',monospace;letter-spacing:.2em;color:var(--lime);display:block;margin-bottom:6px}
+@media (prefers-reduced-motion: reduce){#grain{animation:none}}
 </style>
 </head>
 <body>
+<canvas id="world"></canvas>
+<div id="vig"></div>
+<div id="grain"></div>
 <div id="stage">
-<section id="cover" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1040px;top:160px;width:760px;height:760px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:960px;top:780px;width:120px;height:120px;background:#FF5A36"></x-shape>
-<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
-<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
-<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:248px;width:900px;font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Human Development · Healthy Lifestyle</p>
-<h1 data-build-in="rise 2 auto" style="position:absolute;left:128px;top:319px;width:900px;font-family:'Oswald', Arial, sans-serif;font-size:200px;font-weight:700;line-height:0.95;text-transform:uppercase">Live loud.</h1>
-<h1 data-build-in="rise 3 auto" style="position:absolute;left:128px;top:509px;width:900px;font-family:'Oswald', Arial, sans-serif;font-size:200px;font-weight:700;line-height:0.95;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">Live long.</h1>
-<p data-build-in="fade 4 auto" style="position:absolute;left:128px;top:731px;width:820px;font-size:36px;color:#BFC3D1">Five habits that quietly decide how you feel, look and last.</p>
-<aside>Open with energy. The whole talk is about small daily habits, not extreme diets.</aside>
+<section class="scene" id="cover" data-world="sphere" data-cam="-3.1,0.2,11|-3.1,0,0" data-glow="1" data-ch="0" data-notes="Welcome. Today: what a healthy lifestyle actually is, the evidence behind it, and how habits really change.">
+<div class="abs k" style="left:140px;top:300px">Human Development · Lecture</div>
+<h1 class="abs d1" style="left:128px;top:345px;width:1100px">Healthy<br>Lifestyle</h1>
+<svg class="abs" style="left:140px;top:752px" width="640" height="4"><line class="ul" x1="0" y1="2" x2="640" y2="2" stroke="#C6FF3D" stroke-width="3"/></svg>
+<p class="abs b" style="left:140px;top:786px;width:760px">What it is, why it matters, and how habits really change.</p>
+<div class="abs mono meta" style="left:140px;top:930px">[Presenter name] — [Course code]</div>
 </section>
-
-<section id="manifesto" data-transition="magic" style="background:#C6FF3D;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:245px 128px 128px;display:flex;flex-direction:column;gap:40px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1560px;top:96px;width:200px;height:200px;background:#0E0F1A"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1640px;top:860px;width:80px;height:80px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;width:1300px">The deal</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:128px;font-weight:700;line-height:1.02;text-transform:uppercase;width:1360px">Your body is the only place you are guaranteed to live.</h2>
-<p data-build-in="rise 1 auto" style="position:absolute;left:128px;top:756px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:500;text-transform:uppercase">So stop treating it like a rental.</p>
-<aside>Pause after the headline. Let it land.</aside>
+<section class="scene" id="manifesto" data-world="drift" data-cam="0,0,14" data-glow=".5" data-ch="0" data-notes="Pause after the sentence. Let it land.">
+<h2 class="abs h2 man" style="left:210px;top:330px;width:1500px;text-align:center">Your body is the only place you are guaranteed to live.</h2>
+<svg class="abs" style="left:900px;top:610px" width="120" height="4"><line class="ml" x1="0" y1="2" x2="120" y2="2" stroke="#FF5A36" stroke-width="3"/></svg>
+<p class="abs tag" style="left:210px;top:650px;width:1500px;text-align:center">So stop treating it like a rental.</p>
 </section>
-
-<section id="objectives" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1440px;top:600px;width:320px;height:320px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1380px;top:560px;width:72px;height:72px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Today's lesson</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">By the end, you will be able to</h2>
-<div data-build-in="rise 1 auto" style="position:absolute;left:128px;top:420px;width:1200px;display:flex;gap:40px;align-items:center">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;color:#C6FF3D">01</p>
-<p style="font-size:36px">Define health and a healthy lifestyle (WHO)</p>
-</div>
-<div data-build-in="rise 2 auto" style="position:absolute;left:128px;top:570px;width:1200px;display:flex;gap:40px;align-items:center">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;color:#FF5A36">02</p>
-<p style="font-size:36px">Explain what shapes lifestyle — personal and social factors</p>
-</div>
-<div data-build-in="rise 3 auto" style="position:absolute;left:128px;top:720px;width:1200px;display:flex;gap:40px;align-items:center">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;color:#C6FF3D">03</p>
-<p style="font-size:36px">Apply behaviour-change theory to one of your own habits</p>
-</div>
-<aside>Read the three objectives aloud. Tell students there is a short quiz at the end.</aside>
+<section class="scene" id="objectives" data-world="drift" data-cam="2,1,12|0,0,0" data-glow=".45" data-ch="0" data-notes="Read the three objectives. Tell students there is a short quiz at the end."><div class="abs k" style="left:140px;top:128px">Today's lesson</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">By the end, you will be able to</h2><div class="abs row" style="left:140px;top:400px;width:1640px;height:140px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:44px;color:#C6FF3D">01</div><div class="abs t" style="left:160px;top:30px;width:1440px">Define health and a healthy lifestyle using WHO concepts</div></div><div class="abs row" style="left:140px;top:565px;width:1640px;height:140px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:44px;color:#FF5A36">02</div><div class="abs t" style="left:160px;top:30px;width:1440px">Explain what shapes lifestyle — personal and social factors</div></div><div class="abs row" style="left:140px;top:730px;width:1640px;height:140px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:44px;color:#C6FF3D">03</div><div class="abs t" style="left:160px;top:30px;width:1440px">Apply behaviour-change theory to one of your own habits</div></div></section>
+<section class="scene chap" id="ch1" data-world="helix" data-cam="0,0,11" data-glow=".7" data-ch="1" data-notes="Part one: what a healthy lifestyle is, and why it matters.">
+<i class="abs gl" style="left:140px"></i><i class="abs gl" style="left:550px"></i><i class="abs gl" style="left:960px"></i><i class="abs gl" style="left:1370px"></i><i class="abs gl" style="left:1780px"></i><div class="abs big">01</div>
+<div class="abs k" style="left:140px;top:430px">Part 01</div>
+<h2 class="abs h1" style="left:132px;top:470px;width:1300px">The concept</h2>
+<p class="abs b" style="left:140px;top:656px;width:900px">Definitions, evidence, and what shapes our choices.</p>
 </section>
-
-<section id="ch1" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#C6FF3D;opacity:0.22;filter:blur(20px)"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:804px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
-<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
-<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:304px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 01 · The concept</p>
-<h2 id="t-define" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:380px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:140px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">So what IS a healthy lifestyle?</h2>
-<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:714px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">Definitions, evidence and what shapes our choices</p>
-<aside>Chapter 01: the concept. Pause here for a beat before moving on.</aside>
+<section class="scene" id="define" data-world="helix" data-cam="5,1.5,10|3,0,0" data-glow=".35" data-ch="1" data-notes="Health is not just the absence of illness: it has physical, mental and social dimensions. A lifestyle is a pattern of behaviour, not a single decision."><div class="abs k" style="left:140px;top:128px">Key concept · WHO</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Health is more than not being sick.</h2><svg class="abs" style="left:110px;top:300px" width="820" height="700" viewBox="0 0 820 700">
+<circle class="vc" cx="300" cy="270" r="180" fill="rgba(198,255,61,0)" stroke="#F2EFE8" stroke-opacity=".8" stroke-width="2"/>
+<circle class="vc" cx="520" cy="270" r="180" fill="rgba(198,255,61,0)" stroke="#F2EFE8" stroke-opacity=".8" stroke-width="2"/>
+<circle class="vc" cx="410" cy="455" r="180" fill="rgba(198,255,61,0)" stroke="#F2EFE8" stroke-opacity=".8" stroke-width="2"/>
+<text class="vl" x="225" y="210" text-anchor="middle" font-family="Inter Tight" font-size="34" font-weight="600" fill="#F2EFE8">Physical</text>
+<text class="vl" x="595" y="210" text-anchor="middle" font-family="Inter Tight" font-size="34" font-weight="600" fill="#F2EFE8">Mental</text>
+<text class="vl" x="410" y="560" text-anchor="middle" font-family="Inter Tight" font-size="34" font-weight="600" fill="#F2EFE8">Social</text>
+<g class="vh"><circle cx="410" cy="335" r="58" fill="#C6FF3D"/><text x="410" y="342" text-anchor="middle" font-family="JetBrains Mono" font-size="19" font-weight="700" letter-spacing="2" fill="#06070B">HEALTH</text></g>
+</svg>
+<p class="abs q" style="left:1000px;top:330px;width:780px">“A state of complete physical, mental and social well-being — not merely the absence of disease.”</p>
+<div class="abs mono src" style="left:1000px;top:560px">WHO Constitution, 1948</div>
+<svg class="abs" style="left:1000px;top:640px" width="780" height="2"><line class="dv" x1="0" y1="1" x2="780" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg>
+<div class="abs k k2" style="left:1000px;top:690px;color:#FF5A36">A healthy lifestyle</div>
+<p class="abs b def" style="left:1000px;top:730px;width:760px;color:#F2EFE8">is a way of living that lowers the risk of serious illness and early death.</p>
+<div class="abs mono src" style="left:1000px;top:870px">WHO Regional Office for Europe, 1999</div>
 </section>
-
-<section id="define" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#0E0F1A"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">Key concept</p>
-<h2 id="t-define" style="position:absolute;left:128px;top:191px;width:1500px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">So what IS a healthy lifestyle?</h2>
-<div data-build-in="rise 1 auto" style="position:absolute;left:128px;top:380px;width:808px;background:#FFFFFF;border-left:12px solid #C6FF3D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:600;text-transform:uppercase;color:#5A5E70">Health · WHO Constitution, 1948</p>
-<p style="font-size:34px;line-height:1.35">“A state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.”</p>
-</div>
-<div data-build-in="rise 2 auto" style="position:absolute;left:984px;top:380px;width:808px;background:#FFFFFF;border-left:12px solid #FF5A36;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:600;text-transform:uppercase;color:#5A5E70">Healthy lifestyle · WHO Europe, 1999</p>
-<p style="font-size:34px;line-height:1.35">A way of living that lowers the risk of serious illness and early death — and lets people enjoy more of life.</p>
-</div>
-<p data-build-in="pop 3 auto" style="position:absolute;left:128px;top:770px;width:1664px;font-size:32px;background:#0E0F1A;color:#F4F1EA;padding:28px 40px;border-radius:16px"><span style="color:#C6FF3D"><b>In plain words:</b></span> the daily choices — how you eat, move, sleep, cope and connect — that add up to the person you become.</p>
-<aside>Key point: health is not just "not being sick". It has three dimensions: physical, mental, social. A lifestyle is a pattern of behaviour, not one decision.</aside>
+<section class="scene" id="why" data-world="ring" data-cam="-6,0,12|-6,0,0" data-glow=".3" data-ch="1" data-notes="NCDs are heart disease, cancer, diabetes and chronic lung disease. They are the world's main killers, and lifestyle is the main thing we can change."><div class="abs k" style="left:140px;top:128px">Why it matters</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Most deaths today are shaped by how we live.</h2><svg class="abs" style="left:140px;top:320px" width="600" height="600" viewBox="0 0 600 600">
+<circle class="trk" cx="300" cy="300" r="270" fill="none" stroke="#F2EFE8" stroke-opacity=".12" stroke-width="22"/>
+<circle class="arc" cx="300" cy="300" r="270" fill="none" stroke="#FF5A36" stroke-width="22" transform="rotate(-90 300 300)"/>
+</svg>
+<div class="abs pctw" style="left:140px;top:320px;width:600px;height:600px"><div class="pct num">75%</div><div class="mono pl">of non-pandemic deaths</div></div>
+<p class="abs lead" style="left:880px;top:330px;width:900px">of non-pandemic deaths worldwide come from noncommunicable diseases — heart disease, cancer, diabetes, chronic lung disease.</p>
+<div class="abs st" style="left:880px;top:520px"><div class="sn num s1" style="color:#C6FF3D">43M</div><div class="mono">deaths in 2021</div></div>
+<div class="abs st" style="left:1280px;top:520px"><div class="sn num s2" style="color:#FF5A36">18M</div><div class="mono">before age 70</div></div>
+<div class="abs k k3" style="left:880px;top:730px">Four modifiable drivers</div>
+<div class="abs bh" style="left:880px;top:780px;width:420px"><svg class="abs" style="left:0;top:0" width="420" height="2"><line x1="0" y1="1" x2="420" y2="1" stroke="#FF5A36" stroke-opacity=".7"/></svg><div class="t">Tobacco use</div></div><div class="abs bh" style="left:1330px;top:780px;width:420px"><svg class="abs" style="left:0;top:0" width="420" height="2"><line x1="0" y1="1" x2="420" y2="1" stroke="#FF5A36" stroke-opacity=".7"/></svg><div class="t">Unhealthy diet</div></div><div class="abs bh" style="left:880px;top:870px;width:420px"><svg class="abs" style="left:0;top:0" width="420" height="2"><line x1="0" y1="1" x2="420" y2="1" stroke="#FF5A36" stroke-opacity=".7"/></svg><div class="t">Harmful use of alcohol</div></div><div class="abs bh" style="left:1330px;top:870px;width:420px"><svg class="abs" style="left:0;top:0" width="420" height="2"><line x1="0" y1="1" x2="420" y2="1" stroke="#FF5A36" stroke-opacity=".7"/></svg><div class="t">Physical inactivity</div></div><div class="abs mono srcl" style="left:140px;top:960px">Source: WHO, Noncommunicable diseases fact sheet, 2025</div></section>
+<section class="scene" id="determinants" data-world="wave" data-cam="0,2,12|0,-1,0" data-glow=".35" data-ch="1" data-notes="The rainbow model: our habits sit inside wider layers. Income, housing, work, culture and community shape what is easy or hard to choose. Bronfenbrenner's ecological systems theory makes the same point. Hover each layer."><div class="abs k" style="left:140px;top:128px">Theory · Dahlgren &amp; Whitehead, 1991</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Your lifestyle is one layer of five.</h2><p class="abs mono hint" style="left:140px;top:268px;width:1640px;color:#8B90A0">Hover a layer →</p><svg class="abs rb" style="left:299px;top:300px" width="1322" height="680" viewBox="0 0 1400 720"><path class="core band0" data-i="0" d="M580 700 A120 120 0 0 1 820 700 Z" fill="#FF5A36"/><text class="bl" x="700" y="670" text-anchor="middle" font-family="JetBrains Mono" font-size="17" fill="#06070B" font-weight="700">AGE · SEX · GENES</text><path class="band" data-i="1" d="M520 700 A180 180 0 0 1 880 700" fill="none" stroke="#C6FF3D" stroke-width="114"/><text class="bl" x="700" y="527" text-anchor="middle" font-family="JetBrains Mono" font-size="19" letter-spacing="2" fill="#06070B" font-weight="600">INDIVIDUAL LIFESTYLE</text><path class="band" data-i="2" d="M400 700 A300 300 0 0 1 1000 700" fill="none" stroke="rgba(242,239,232,0.30)" stroke-width="114"/><text class="bl" x="700" y="407" text-anchor="middle" font-family="JetBrains Mono" font-size="19" letter-spacing="2" fill="#F2EFE8" font-weight="600">SOCIAL &AMP; COMMUNITY NETWORKS</text><path class="band" data-i="3" d="M280 700 A420 420 0 0 1 1120 700" fill="none" stroke="rgba(242,239,232,0.20)" stroke-width="114"/><text class="bl" x="700" y="287" text-anchor="middle" font-family="JetBrains Mono" font-size="19" letter-spacing="2" fill="#F2EFE8" font-weight="600">LIVING &AMP; WORKING CONDITIONS</text><path class="band" data-i="4" d="M160 700 A540 540 0 0 1 1240 700" fill="none" stroke="rgba(242,239,232,0.12)" stroke-width="114"/><text class="bl" x="700" y="167" text-anchor="middle" font-family="JetBrains Mono" font-size="19" letter-spacing="2" fill="#F2EFE8" font-weight="600">SOCIOECONOMIC, CULTURAL &AMP; ENVIRONMENTAL</text></svg></section>
+<section class="scene chap" id="ch2" data-world="columns" data-cam="0,0,13" data-glow=".7" data-ch="2" data-notes="Part two: the five pillars, one by one.">
+<i class="abs gl" style="left:140px"></i><i class="abs gl" style="left:550px"></i><i class="abs gl" style="left:960px"></i><i class="abs gl" style="left:1370px"></i><i class="abs gl" style="left:1780px"></i><div class="abs big">02</div>
+<div class="abs k" style="left:140px;top:430px">Part 02</div>
+<h2 class="abs h1" style="left:132px;top:470px;width:1300px">The pillars</h2>
+<p class="abs b" style="left:140px;top:656px;width:900px">Move · Eat · Sleep · Mind · Cut</p>
 </section>
-
-<section id="why" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:grid;grid-template-columns:820px 1fr;gap:80px;align-items:center">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:96px;top:200px;width:700px;height:700px;background:#1C1E2E"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:700px;top:180px;width:96px;height:96px;background:#FF5A36"></x-shape>
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Why it matters</p>
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:300px;font-weight:700;line-height:1;color:#C6FF3D">75%</p>
-<p style="font-size:32px;color:#BFC3D1">of non-pandemic deaths worldwide in 2021 came from noncommunicable diseases: <b>43 million people</b>. 18 million of them died before age 70.</p>
-<p style="font-size:24px;color:#8B90A6">Source: WHO NCD fact sheet, 2025</p>
-</div>
-<h2 style="position:absolute;left:1028px;top:204px;width:764px;font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.05;text-transform:uppercase">Four behaviours drive the risk</h2>
-<p data-build-in="left 1 auto" style="position:absolute;left:1028px;top:379px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #FF5A36;padding:20px 32px;border-radius:12px">Tobacco use</p>
-<p data-build-in="left 2 auto" style="position:absolute;left:1028px;top:494px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #C6FF3D;padding:20px 32px;border-radius:12px">Unhealthy diet</p>
-<p data-build-in="left 3 auto" style="position:absolute;left:1028px;top:608px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #FF5A36;padding:20px 32px;border-radius:12px">Harmful use of alcohol</p>
-<p data-build-in="left 4 auto" style="position:absolute;left:1028px;top:722px;width:764px;font-size:36px;font-family:'Oswald', Arial, sans-serif;font-weight:600;background:#1C1E2E;border-left:8px solid #C6FF3D;padding:20px 32px;border-radius:12px">Physical inactivity</p>
-<p data-build-in="fade 5 auto" style="position:absolute;left:1028px;top:837px;width:764px;font-size:28px;color:#BFC3D1">All four are <b>lifestyle</b> factors — they can be changed.</p>
-<aside>NCDs = heart disease, cancer, diabetes, chronic lung disease. They are the world's main killers, and lifestyle is the main modifiable risk.</aside>
+<section class="scene" id="pillars" data-world="columns" data-cam="0,-.5,16" data-glow=".25" data-ch="2" data-notes="Five pillars that hold each other up. Each gets its own slide next."><div class="abs k" style="left:140px;top:128px">The system</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Five pillars. One structure.</h2><svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C6FF3D" stop-opacity=".22"/><stop offset="1" stop-color="#C6FF3D" stop-opacity="0"/></linearGradient></defs><rect class="col" x="190" y="440" width="220" height="460" fill="url(#pg)" stroke="#F2EFE8" stroke-opacity=".35"/><rect class="col" x="520" y="440" width="220" height="460" fill="url(#pg)" stroke="#F2EFE8" stroke-opacity=".35"/><rect class="col" x="850" y="440" width="220" height="460" fill="url(#pg)" stroke="#F2EFE8" stroke-opacity=".35"/><rect class="col" x="1180" y="440" width="220" height="460" fill="url(#pg)" stroke="#F2EFE8" stroke-opacity=".35"/><rect class="col" x="1510" y="440" width="220" height="460" fill="url(#pg)" stroke="#F2EFE8" stroke-opacity=".35"/><line class="base" x1="140" y1="900" x2="1780" y2="900" stroke="#F2EFE8" stroke-opacity=".5" stroke-width="2"/><line class="lintel" x1="160" y1="440" x2="1760" y2="440" stroke="#C6FF3D" stroke-width="3"/></svg><div class="abs mono cn" style="left:210px;top:470px;color:#C6FF3D">01</div><div class="abs cd" style="left:210px;top:780px;width:180px">Daily motion, not punishment</div><div class="abs cl" style="left:150px;top:922px;width:300px">Move</div><div class="abs mono cn" style="left:540px;top:470px;color:#FF5A36">02</div><div class="abs cd" style="left:540px;top:780px;width:180px">Real food, mostly plants</div><div class="abs cl" style="left:480px;top:922px;width:300px">Eat</div><div class="abs mono cn" style="left:870px;top:470px;color:#C6FF3D">03</div><div class="abs cd" style="left:870px;top:780px;width:180px">The free performance drug</div><div class="abs cl" style="left:810px;top:922px;width:300px">Sleep</div><div class="abs mono cn" style="left:1200px;top:470px;color:#FF5A36">04</div><div class="abs cd" style="left:1200px;top:780px;width:180px">Calm head, real people</div><div class="abs cl" style="left:1140px;top:922px;width:300px">Mind</div><div class="abs mono cn" style="left:1530px;top:470px;color:#C6FF3D">05</div><div class="abs cd" style="left:1530px;top:780px;width:180px">Drop what drains you</div><div class="abs cl" style="left:1470px;top:922px;width:300px">Cut</div><div class="abs mono cap" style="left:140px;top:396px;width:1640px;text-align:center;color:#C6FF3D">Each pillar carries the others</div></section>
+<section class="scene" id="move" data-world="wave" data-cam="-3,1,10|0,-2,0" data-glow=".4" data-ch="2" data-notes="150 minutes sounds like a lot. Divide by seven: about 22 minutes a day."><div class="abs k" style="left:140px;top:128px">Pillar 01 · Move</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Sit less. Move more.</h2><div class="abs bignum num" style="left:128px;top:330px">150</div><div class="abs mono unit" style="left:140px;top:640px">minutes a week · WHO minimum for adults</div><p class="abs b note" style="left:140px;top:720px;width:680px">150–300 minutes of moderate activity a week, plus muscle strengthening twice a week. That is about <span style="color:#F2EFE8">22 minutes a day.</span></p><svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080"><text class="dl" x="1800" y="733.7" font-family="JetBrains Mono" font-size="18" fill="#4A4F5E">50</text><line class="dl" x1="920" y1="726.7" x2="1780" y2="726.7" stroke="#F2EFE8" stroke-opacity=".07"/><text class="dl" x="1800" y="580.3" font-family="JetBrains Mono" font-size="18" fill="#4A4F5E">100</text><line class="dl" x1="920" y1="573.3" x2="1780" y2="573.3" stroke="#F2EFE8" stroke-opacity=".07"/><text class="dl" x="1800" y="427.0" font-family="JetBrains Mono" font-size="18" fill="#4A4F5E">150</text><line class="dl" x1="920" y1="420.0" x2="1780" y2="420.0" stroke="#F2EFE8" stroke-opacity=".07"/><line class="axis" x1="920" y1="880" x2="1780" y2="880" stroke="#F2EFE8" stroke-opacity=".5" stroke-width="2"/><rect class="bar" x="950" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="980" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">M</text><rect class="bar" x="1074" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="1104" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">T</text><rect class="bar" x="1198" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="1228" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">W</text><rect class="bar" x="1322" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="1352" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">T</text><rect class="bar" x="1446" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="1476" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">F</text><rect class="bar" x="1570" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="1600" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">S</text><rect class="bar" x="1694" y="812.5" width="60" height="67.5" fill="#C6FF3D" fill-opacity=".85"/><text class="dl" x="1724" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">S</text><path class="cum" d="M920 880 L980 812.5 L1104 745.1 L1228 677.6 L1352 610.1 L1476 542.7 L1600 475.2 L1724 420.0" fill="none" stroke="#F2EFE8" stroke-width="3"/><circle class="dot" cx="980" cy="812.5" r="7" fill="#F2EFE8"/><circle class="dot" cx="1104" cy="745.1" r="7" fill="#F2EFE8"/><circle class="dot" cx="1228" cy="677.6" r="7" fill="#F2EFE8"/><circle class="dot" cx="1352" cy="610.1" r="7" fill="#F2EFE8"/><circle class="dot" cx="1476" cy="542.7" r="7" fill="#F2EFE8"/><circle class="dot" cx="1600" cy="475.2" r="7" fill="#F2EFE8"/><circle class="dot" cx="1724" cy="420.0" r="7" fill="#F2EFE8"/></svg><div class="abs mono endlab" style="left:1690px;top:364px;color:#C6FF3D">= 150</div><div class="abs mono" style="left:920px;top:330px;color:#8B90A0" data-f="1">Daily 22 min → weekly total</div><div class="abs mono srcl" style="left:140px;top:960px">Source: WHO Guidelines on physical activity and sedentary behaviour, 2020</div></section>
+<section class="scene" id="eat" data-world="wave" data-cam="3,1.6,10|0,-2,0" data-glow=".35" data-ch="2" data-notes="Use the plate, not a calorie app: half vegetables and fruit, a quarter whole grains, a quarter protein."><div class="abs k" style="left:140px;top:128px">Pillar 02 · Eat</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Build the plate. Skip the diet.</h2><svg class="abs" style="left:250px;top:330px" width="620" height="620" viewBox="0 0 620 620">
+<circle cx="310" cy="310" r="250" fill="none" stroke="#F2EFE8" stroke-opacity=".08" stroke-width="100"/>
+<path class="seg" d="M310 60 A250 250 0 0 0 310 560" fill="none" stroke="#C6FF3D" stroke-width="100"/>
+<path class="seg" d="M310 60 A250 250 0 0 1 560 310" fill="none" stroke="#FF5A36" stroke-width="100"/>
+<path class="seg" d="M560 310 A250 250 0 0 1 310 560" fill="none" stroke="#F2EFE8" stroke-width="100"/>
+<line x1="310" y1="0" x2="310" y2="620" stroke="#06070B" stroke-width="8"/><line x1="310" y1="310" x2="620" y2="310" stroke="#06070B" stroke-width="8"/>
+<text x="310" y="318" text-anchor="middle" font-family="JetBrains Mono" font-size="20" letter-spacing="3" fill="#8B90A0">YOUR PLATE</text></svg><div class="abs lg" data-v="50" style="left:1000px;top:360px;width:780px"><i style="background:#C6FF3D"></i><span class="pc num">50%</span><span class="lt">Vegetables &amp; fruit</span></div><div class="abs lg" data-v="25" style="left:1000px;top:470px;width:780px"><i style="background:#FF5A36"></i><span class="pc num">25%</span><span class="lt">Whole grains</span></div><div class="abs lg" data-v="25" style="left:1000px;top:580px;width:780px"><i style="background:#F2EFE8"></i><span class="pc num">25%</span><span class="lt">Healthy protein</span></div><div class="abs tip mono" style="left:1000px;top:720px">→ Water first. Sugary drinks last.</div><div class="abs tip mono" style="left:1000px;top:770px">→ Cook more. Ultra-processed less.</div><div class="abs tip mono" style="left:1000px;top:820px">→ WHO: at least 400 g of fruit &amp; vegetables a day.</div><div class="abs mono srcl" style="left:140px;top:960px">Sources: Harvard T.H. Chan School of Public Health, Healthy Eating Plate · WHO, Healthy diet</div></section>
+<section class="scene" id="sleep" data-world="drift" data-cam="0,0,8" data-glow=".45" data-ch="2" data-notes="Adults need 7 to 9 hours. A consistent wake-up time matters more than bedtime."><div class="abs k" style="left:140px;top:128px">Pillar 03 · Sleep</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">The free performance drug.</h2><svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080">
+<circle class="dialc" cx="560" cy="650" r="250" fill="none" stroke="#F2EFE8" stroke-opacity=".25" stroke-width="2"/><line class="tick" x1="560.0" y1="434.0" x2="560.0" y2="450.0" stroke="#F2EFE8" stroke-opacity="0.7" stroke-width="2"/><line class="tick" x1="615.9" y1="441.4" x2="613.8" y2="449.1" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="668.0" y1="462.9" x2="664.0" y2="469.9" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="712.7" y1="497.3" x2="707.1" y2="502.9" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="747.1" y1="542.0" x2="740.1" y2="546.0" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="768.6" y1="594.1" x2="760.9" y2="596.2" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="776.0" y1="650.0" x2="760.0" y2="650.0" stroke="#F2EFE8" stroke-opacity="0.7" stroke-width="2"/><line class="tick" x1="768.6" y1="705.9" x2="760.9" y2="703.8" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="747.1" y1="758.0" x2="740.1" y2="754.0" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="712.7" y1="802.7" x2="707.1" y2="797.1" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="668.0" y1="837.1" x2="664.0" y2="830.1" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="615.9" y1="858.6" x2="613.8" y2="850.9" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="560.0" y1="866.0" x2="560.0" y2="850.0" stroke="#F2EFE8" stroke-opacity="0.7" stroke-width="2"/><line class="tick" x1="504.1" y1="858.6" x2="506.2" y2="850.9" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="452.0" y1="837.1" x2="456.0" y2="830.1" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="407.3" y1="802.7" x2="412.9" y2="797.1" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="372.9" y1="758.0" x2="379.9" y2="754.0" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="351.4" y1="705.9" x2="359.1" y2="703.8" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="344.0" y1="650.0" x2="360.0" y2="650.0" stroke="#F2EFE8" stroke-opacity="0.7" stroke-width="2"/><line class="tick" x1="351.4" y1="594.1" x2="359.1" y2="596.2" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="372.9" y1="542.0" x2="379.9" y2="546.0" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="407.3" y1="497.3" x2="412.9" y2="502.9" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="452.0" y1="462.9" x2="456.0" y2="469.9" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><line class="tick" x1="504.1" y1="441.4" x2="506.2" y2="449.1" stroke="#F2EFE8" stroke-opacity="0.3" stroke-width="2"/><text class="hl" x="560.0" y="363.0" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">00:00</text><text class="hl" x="854.0" y="657.0" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">06:00</text><text class="hl" x="560.0" y="951.0" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">12:00</text><text class="hl" x="266.0" y="657.0" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0">18:00</text><text class="hl" x="515.5" y="490.9" text-anchor="middle" font-family="JetBrains Mono" font-size="18" fill="#C6FF3D">23:00</text><text class="hl" x="726.1" y="701.5" text-anchor="middle" font-family="JetBrains Mono" font-size="18" fill="#C6FF3D">07:00</text>
+<path class="night" d="M495.3 408.5 A250 250 0 0 1 801.5 714.7" fill="none" stroke="#C6FF3D" stroke-width="22" stroke-linecap="round"/>
+<g class="moon"><circle cx="495.3" cy="408.5" r="16" fill="#F2EFE8"/><circle cx="503.3" cy="402.5" r="14" fill="#06070B"/></g></svg>
+<div class="abs dialn" style="left:360px;top:560px;width:400px"><div class="num">7–9</div><div class="mono">hours a night</div></div><div class="abs hb" style="left:1000px;top:400px;width:780px"><svg class="abs" style="left:0;top:0" width="780" height="2"><line x1="0" y1="1" x2="780" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">01</div><div class="abs t" style="left:90px;top:24px;width:680px">Same wake-up time, every day</div></div><div class="abs hb" style="left:1000px;top:530px;width:780px"><svg class="abs" style="left:0;top:0" width="780" height="2"><line x1="0" y1="1" x2="780" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">02</div><div class="abs t" style="left:90px;top:24px;width:680px">Screens off 60 minutes before bed</div></div><div class="abs hb" style="left:1000px;top:660px;width:780px"><svg class="abs" style="left:0;top:0" width="780" height="2"><line x1="0" y1="1" x2="780" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">03</div><div class="abs t" style="left:90px;top:24px;width:680px">A cool, dark, quiet room</div></div><div class="abs mono srcl" style="left:140px;top:960px">Source: Watson et al., 2015, Sleep 38(6)</div></section>
+<section class="scene" id="mind" data-world="sphere" data-cam="-3.6,0,13|-3.6,0,0" data-glow=".3" data-ch="2" data-notes="Do one breath together: in for four, out for four. Mental health is a pillar, not an extra."><div class="abs k" style="left:140px;top:128px">Pillar 04 · Mind</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Stress is a signal, not a lifestyle.</h2><p class="abs b try" style="left:140px;top:300px;width:700px">Try it now — one slow breath, together.</p><div class="abs act" style="left:140px;top:420px;width:820px"><svg class="abs" style="left:0;top:0" width="820" height="2"><line x1="0" y1="1" x2="820" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">01</div><div class="abs t" style="left:90px;top:22px">Breathe</div><div class="abs d" style="left:90px;top:84px;width:700px">Two minutes of slow breathing calms the stress response.</div></div><div class="abs act" style="left:140px;top:585px;width:820px"><svg class="abs" style="left:0;top:0" width="820" height="2"><line x1="0" y1="1" x2="820" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#FF5A36">02</div><div class="abs t" style="left:90px;top:22px">Get outside</div><div class="abs d" style="left:90px;top:84px;width:700px">Twenty minutes of daylight and movement.</div></div><div class="abs act" style="left:140px;top:750px;width:820px"><svg class="abs" style="left:0;top:0" width="820" height="2"><line x1="0" y1="1" x2="820" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">03</div><div class="abs t" style="left:90px;top:22px">Connect</div><div class="abs d" style="left:90px;top:84px;width:700px">Talk to a real human, not a feed.</div></div><div class="abs breath" style="left:1100px;top:260px;width:620px;height:620px"><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><i class="core"></i><div class="bt">Breathe in</div></div></section>
+<section class="scene" id="cut" data-world="drift" data-cam="-2,0,12" data-glow=".3" data-ch="2" data-notes="Healthy living is also about subtraction. Ask: which one would you cut first?"><div class="abs k" style="left:140px;top:128px">Pillar 05 · Cut</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Cut the noise.</h2><div class="abs w" style="left:136px;top:320px"><span class="wt">Smoking</span><i class="strike"></i></div><div class="abs w" style="left:136px;top:460px"><span class="wt">Excess alcohol</span><i class="strike"></i></div><div class="abs w" style="left:136px;top:600px"><span class="wt">Sitting all day</span><i class="strike"></i></div><div class="abs w" style="left:136px;top:740px"><span class="wt">Scrolling at 1 AM</span><i class="strike"></i></div><p class="abs h3 sub" style="left:1280px;top:440px;width:520px">Healthy living is also subtraction.</p><div class="abs mono pick" style="left:1280px;top:640px;color:#FF5A36">Pick one. Cut it first.</div></section>
+<section class="scene chap" id="ch3" data-world="stream" data-cam="0,0,11" data-glow=".7" data-ch="3" data-notes="Part three: why this matters now, and how change actually happens.">
+<i class="abs gl" style="left:140px"></i><i class="abs gl" style="left:550px"></i><i class="abs gl" style="left:960px"></i><i class="abs gl" style="left:1370px"></i><i class="abs gl" style="left:1780px"></i><div class="abs big">03</div>
+<div class="abs k" style="left:140px;top:430px">Part 03</div>
+<h2 class="abs h1" style="left:132px;top:470px;width:1300px">Human development</h2>
+<p class="abs b" style="left:140px;top:656px;width:900px">Life stage, behaviour change, and how habits form.</p>
 </section>
-
-<section id="determinants" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:16px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Theory · Dahlgren &amp; Whitehead (1991)</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1;text-transform:uppercase;width:1300px">Lifestyle is not only a personal choice</h2>
-<svg aria-label="Rainbow model of the determinants of health: five nested layers from age, sex and genes at the core, then individual lifestyle, social and community networks, living and working conditions, and broad socioeconomic, cultural and environmental conditions" data-build-in="scale 1 auto" viewBox="0 0 1200 600" width="1200" height="600" style="position:absolute;left:360px;top:330px;width:1200px;height:600px"><path d="M10 600 A590 590 0 0 1 1190 600 Z" fill="#1F2244"/><path d="M120 600 A480 480 0 0 1 1080 600 Z" fill="#2C2F5A"/><path d="M230 600 A370 370 0 0 1 970 600 Z" fill="#3A3E73"/><path d="M340 600 A260 260 0 0 1 860 600 Z" fill="#C6FF3D"/><path d="M450 600 A150 150 0 0 1 750 600 Z" fill="#FF5A36"/></svg>
-<p data-build-in="fade 2 auto" style="position:absolute;left:560px;top:377px;width:800px;font-family:'Oswald', Arial, sans-serif;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase">Socioeconomic, cultural &amp; environmental</p>
-<p data-build-in="fade 3 auto" style="position:absolute;left:610px;top:487px;width:700px;font-family:'Oswald', Arial, sans-serif;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase">Living &amp; working conditions</p>
-<p data-build-in="fade 4 auto" style="position:absolute;left:660px;top:597px;width:600px;font-family:'Oswald', Arial, sans-serif;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase">Social &amp; community networks</p>
-<p data-build-in="pop 5 auto" style="position:absolute;left:780px;top:708px;width:360px;font-family:'Oswald', Arial, sans-serif;font-size:26px;font-weight:700;text-align:center;text-transform:uppercase;color:#0E0F1A">Individual lifestyle</p>
-<p data-build-in="fade 6 auto" style="position:absolute;left:840px;top:838px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:26px;font-weight:700;line-height:1.15;text-align:center;text-transform:uppercase;color:#0E0F1A">Age, sex<br>&amp; genes</p>
-<aside>The rainbow model: our habits sit inside wider layers. Income, housing, work, culture and community shape what is easy or hard to choose. Link to human development: Bronfenbrenner's ecological systems make the same point.</aside>
+<section class="scene" id="lifespan" data-world="stream" data-cam="0,1.5,12|0,-1,0" data-glow=".3" data-ch="3" data-notes="Ask: who here cooks for themselves now? Who sleeps less than at school? University is the stage where lifestyle gets locked in."><div class="abs k" style="left:140px;top:128px">Human development lens</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Why your twenties matter.</h2><i class="abs lax" style="left:140px;top:640px;width:1640px"></i><i class="abs ltk" data-a="0" style="top:633px"></i><div class="abs mono ltl" data-a="0" style="top:660px">0</div><i class="abs ltk" data-a="10" style="top:633px"></i><div class="abs mono ltl" data-a="10" style="top:660px">10</div><i class="abs ltk" data-a="20" style="top:633px"></i><div class="abs mono ltl" data-a="20" style="top:660px">20</div><i class="abs ltk" data-a="30" style="top:633px"></i><div class="abs mono ltl" data-a="30" style="top:660px">30</div><i class="abs ltk" data-a="40" style="top:633px"></i><div class="abs mono ltl" data-a="40" style="top:660px">40</div><i class="abs ltk" data-a="50" style="top:633px"></i><div class="abs mono ltl" data-a="50" style="top:660px">50</div><i class="abs ltk" data-a="60" style="top:633px"></i><div class="abs mono ltl" data-a="60" style="top:660px">60</div><i class="abs ltk" data-a="70" style="top:633px"></i><div class="abs mono ltl" data-a="70" style="top:660px">70</div><i class="abs ltk" data-a="80" style="top:633px"></i><div class="abs mono ltl" data-a="80" style="top:660px">80</div><div class="abs lband" data-a0="0" data-a1="12" style="top:500px;height:100px"><b>Childhood</b><span>0–12</span></div><div class="abs lband" data-a0="12" data-a1="18" style="top:500px;height:100px"><b>Teens</b><span>12–18</span></div><div class="abs lband hot" data-a0="18" data-a1="25" style="top:500px;height:100px"><b>Emerging adult</b><span>18–25</span></div><div class="abs lband" data-a0="25" data-a1="65" style="top:500px;height:100px"><b>Adulthood</b><span>25–65</span></div><div class="abs lband" data-a0="65" data-a1="80" style="top:500px;height:100px"><b>Later life</b><span>65+</span></div><div class="abs here mono">You are here</div><i class="abs herel"></i><div class="abs tk" style="left:140px;top:760px;width:500px"><b>A new life stage</b><span>Arnett (2000) named 18–25 “emerging adulthood”: exploration and instability.</span></div><div class="abs tk" style="left:700px;top:760px;width:500px"><b>First real control</b><span>For many, the first years of choosing your own food, sleep, money and substances.</span></div><div class="abs tk" style="left:1260px;top:760px;width:500px"><b>Habits that stick</b><span>Patterns set now often carry into adulthood — a key window to intervene (Nelson et al., 2008).</span></div></section>
+<section class="scene" id="change" data-world="stairs" data-cam="1,1.5,14|1,0,0" data-glow=".3" data-ch="3" data-notes="The Transtheoretical Model. People move up and down; relapse is normal, not failure. Information helps early, planning in the middle, support at the end."><div class="abs k" style="left:140px;top:128px">Theory · Prochaska &amp; DiClemente, 1983</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Change happens in stages.</h2><svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080">
+<rect class="mfill" x="1420" y="400" width="360" height="520" fill="#C6FF3D" fill-opacity=".05"/>
+<path class="stair" d="M140 920 L220 920 L220 820 L520 820 L520 715 L820 715 L820 610 L1120 610 L1120 505 L1420 505 L1420 400 L1780 400" fill="none" stroke="#F2EFE8" stroke-width="3" stroke-linejoin="round"/>
+<path class="relapse" d="M1290 470 C1230 250, 760 270, 690 660" fill="none" stroke="#FF5A36" stroke-width="3"/>
+<path class="rhead" d="M676 640 L690 664 L706 642" fill="none" stroke="#FF5A36" stroke-width="3"/>
+<circle class="climber" cx="180" cy="906" r="14" fill="#C6FF3D"/></svg><div class="abs stl" data-i="0" style="left:244px;top:728px;width:270px"><b>Precontemplation</b><span>“I don’t see a problem.”</span></div><div class="abs stl" data-i="1" style="left:544px;top:623px;width:270px"><b>Contemplation</b><span>“Maybe I should…”</span></div><div class="abs stl" data-i="2" style="left:844px;top:518px;width:270px"><b>Preparation</b><span>“I start Monday.” A plan.</span></div><div class="abs stl" data-i="3" style="left:1144px;top:413px;width:270px"><b>Action</b><span>Doing it, under 6 months.</span></div><div class="abs stl" data-i="4" style="left:1444px;top:308px;width:330px"><b>Maintenance</b><span>6+ months. Part of who you are.</span></div>
+<div class="abs mono rlab" style="left:860px;top:282px;color:#FF5A36">Relapse is normal — not failure</div></section>
+<section class="scene" id="habit" data-world="stream" data-cam="-2,2,11|0,0,0" data-glow=".25" data-ch="3" data-notes="The 21-day idea is a myth. 96 people built a daily habit; it took a median of 66 days. Press → to morph the myth into the data. Hover the chart to read any day."><div class="abs k" style="left:140px;top:128px">Research · Lally et al., 2010</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Habits take time.</h2><div class="abs h66" style="left:1300px;top:120px;width:480px"><div class="num n66">21</div><div class="mono lab66">days — the myth</div></div>
+<svg class="abs hc" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080">
+<rect class="band" x="396.9" y="400" width="1270.8" height="480" fill="#C6FF3D" fill-opacity=".05"/>
+<line x1="300" y1="760.0" x2="1700" y2="760.0" stroke="#F2EFE8" stroke-opacity=".08" class="hg"/><line x1="300" y1="640.0" x2="1700" y2="640.0" stroke="#F2EFE8" stroke-opacity=".08" class="hg"/><line x1="300" y1="520.0" x2="1700" y2="520.0" stroke="#F2EFE8" stroke-opacity=".08" class="hg"/><line x1="300" y1="400.0" x2="1700" y2="400.0" stroke="#F2EFE8" stroke-opacity=".08" class="hg"/><line class="ax" x1="300" y1="880" x2="1700" y2="880" stroke="#F2EFE8" stroke-opacity=".5" stroke-width="2"/>
+<line class="ax" x1="300" y1="880" x2="300" y2="380" stroke="#F2EFE8" stroke-opacity=".5" stroke-width="2"/><text x="300.0" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">0</text><text x="413.1" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">21</text><text x="655.4" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#C6FF3D" class="hk">66</text><text x="838.5" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">100</text><text x="1107.7" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">150</text><text x="1376.9" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">200</text><text x="1667.7" y="920" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">254</text><text x="280" y="887.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">0%</text><text x="280" y="647.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">50%</text><text x="280" y="407.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#8B90A0" class="hk">100%</text>
+<line class="m66" x1="655.4" y1="880" x2="655.4" y2="424.0" stroke="#C6FF3D" stroke-dasharray="4 6" stroke-width="2"/>
+<path class="curve" d="M300.0 880.0 L311.7 830.5 L323.3 781.0 L335.0 731.4 L346.7 681.9 L358.3 632.4 L370.0 582.9 L381.7 533.3 L393.3 483.8 L405.0 434.3 L416.7 400.0 L428.3 400.0 L440.0 400.0 L451.7 400.0 L463.3 400.0 L475.0 400.0 L486.7 400.0 L498.3 400.0 L510.0 400.0 L521.7 400.0 L533.3 400.0 L545.0 400.0 L556.7 400.0 L568.3 400.0 L580.0 400.0 L591.7 400.0 L603.3 400.0 L615.0 400.0 L626.7 400.0 L638.3 400.0 L650.0 400.0 L661.7 400.0 L673.3 400.0 L685.0 400.0 L696.7 400.0 L708.3 400.0 L720.0 400.0 L731.7 400.0 L743.3 400.0 L755.0 400.0 L766.7 400.0 L778.3 400.0 L790.0 400.0 L801.7 400.0 L813.3 400.0 L825.0 400.0 L836.7 400.0 L848.3 400.0 L860.0 400.0 L871.7 400.0 L883.3 400.0 L895.0 400.0 L906.7 400.0 L918.3 400.0 L930.0 400.0 L941.7 400.0 L953.3 400.0 L965.0 400.0 L976.7 400.0 L988.3 400.0 L1000.0 400.0 L1011.7 400.0 L1023.3 400.0 L1035.0 400.0 L1046.7 400.0 L1058.3 400.0 L1070.0 400.0 L1081.7 400.0 L1093.3 400.0 L1105.0 400.0 L1116.7 400.0 L1128.3 400.0 L1140.0 400.0 L1151.7 400.0 L1163.3 400.0 L1175.0 400.0 L1186.7 400.0 L1198.3 400.0 L1210.0 400.0 L1221.7 400.0 L1233.3 400.0 L1245.0 400.0 L1256.7 400.0 L1268.3 400.0 L1280.0 400.0 L1291.7 400.0 L1303.3 400.0 L1315.0 400.0 L1326.7 400.0 L1338.3 400.0 L1350.0 400.0 L1361.7 400.0 L1373.3 400.0 L1385.0 400.0 L1396.7 400.0 L1408.3 400.0 L1420.0 400.0 L1431.7 400.0 L1443.3 400.0 L1455.0 400.0 L1466.7 400.0 L1478.3 400.0 L1490.0 400.0 L1501.7 400.0 L1513.3 400.0 L1525.0 400.0 L1536.7 400.0 L1548.3 400.0 L1560.0 400.0 L1571.7 400.0 L1583.3 400.0 L1595.0 400.0 L1606.7 400.0 L1618.3 400.0 L1630.0 400.0 L1641.7 400.0 L1653.3 400.0 L1665.0 400.0 L1676.7 400.0 L1688.3 400.0 L1700.0 400.0" fill="none" stroke="#FF5A36" stroke-width="4"/>
+<path class="real" d="M300.0 880.0 L311.7 835.0 L323.3 794.2 L335.0 757.2 L346.7 723.7 L358.3 693.3 L370.0 665.8 L381.7 640.9 L393.3 618.3 L405.0 597.8 L416.7 579.3 L428.3 562.5 L440.0 547.2 L451.7 533.4 L463.3 520.9 L475.0 509.6 L486.7 499.3 L498.3 490.0 L510.0 481.5 L521.7 473.9 L533.3 467.0 L545.0 460.7 L556.7 455.0 L568.3 449.8 L580.0 445.2 L591.7 440.9 L603.3 437.1 L615.0 433.6 L626.7 430.5 L638.3 427.6 L650.0 425.0 L661.7 422.7 L673.3 420.5 L685.0 418.6 L696.7 416.9 L708.3 415.3 L720.0 413.9 L731.7 412.6 L743.3 411.4 L755.0 410.3 L766.7 409.3 L778.3 408.5 L790.0 407.7 L801.7 407.0 L813.3 406.3 L825.0 405.7 L836.7 405.2 L848.3 404.7 L860.0 404.2 L871.7 403.8 L883.3 403.5 L895.0 403.2 L906.7 402.9 L918.3 402.6 L930.0 402.4 L941.7 402.1 L953.3 401.9 L965.0 401.8 L976.7 401.6 L988.3 401.4 L1000.0 401.3 L1011.7 401.2 L1023.3 401.1 L1035.0 401.0 L1046.7 400.9 L1058.3 400.8 L1070.0 400.7 L1081.7 400.7 L1093.3 400.6 L1105.0 400.5 L1116.7 400.5 L1128.3 400.4 L1140.0 400.4 L1151.7 400.4 L1163.3 400.3 L1175.0 400.3 L1186.7 400.3 L1198.3 400.2 L1210.0 400.2 L1221.7 400.2 L1233.3 400.2 L1245.0 400.2 L1256.7 400.1 L1268.3 400.1 L1280.0 400.1 L1291.7 400.1 L1303.3 400.1 L1315.0 400.1 L1326.7 400.1 L1338.3 400.1 L1350.0 400.1 L1361.7 400.1 L1373.3 400.1 L1385.0 400.1 L1396.7 400.0 L1408.3 400.0 L1420.0 400.0 L1431.7 400.0 L1443.3 400.0 L1455.0 400.0 L1466.7 400.0 L1478.3 400.0 L1490.0 400.0 L1501.7 400.0 L1513.3 400.0 L1525.0 400.0 L1536.7 400.0 L1548.3 400.0 L1560.0 400.0 L1571.7 400.0 L1583.3 400.0 L1595.0 400.0 L1606.7 400.0 L1618.3 400.0 L1630.0 400.0 L1641.7 400.0 L1653.3 400.0 L1665.0 400.0 L1676.7 400.0 L1688.3 400.0 L1700.0 400.0" fill="none" stroke="none"/>
+<circle class="d66" cx="655.4" cy="424.0" r="9" fill="#C6FF3D"/>
+<line class="xh" x1="0" y1="400" x2="0" y2="880" stroke="#F2EFE8" stroke-opacity=".4"/><circle class="xd" cx="0" cy="0" r="7" fill="#F2EFE8"/>
+<rect class="hit" x="300" y="400" width="1400" height="480" fill="transparent"/></svg>
+<div class="abs mono blab" style="left:1000px;top:830px;color:#C6FF3D">Range in the study: 18–254 days</div>
+<div class="abs mono clab" style="left:437px;top:414px;color:#FF5A36">The myth: fully automatic in 21 days</div>
+<div class="abs mono xr" style="left:0;top:0"></div>
+<div class="abs mono" style="left:290px;top:340px;color:#8B90A0">Automaticity ↑</div>
+<div class="abs mono foot" style="left:140px;top:960px">96 participants · 12 weeks · missing a single day did not derail the habit · press → to see the data</div></section>
+<section class="scene chap" id="ch4" data-world="grid" data-cam="0,1.6,10|0,-1,-4" data-glow=".7" data-ch="4" data-notes="Part four: turn it into action.">
+<i class="abs gl" style="left:140px"></i><i class="abs gl" style="left:550px"></i><i class="abs gl" style="left:960px"></i><i class="abs gl" style="left:1370px"></i><i class="abs gl" style="left:1780px"></i><div class="abs big">04</div>
+<div class="abs k" style="left:140px;top:430px">Part 04</div>
+<h2 class="abs h1" style="left:132px;top:470px;width:1300px">Put it to work</h2>
+<p class="abs b" style="left:140px;top:656px;width:900px">A routine, a class activity, a debate and a quick check.</p>
 </section>
-
-<section id="ch2" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#FF5A36;opacity:0.22;filter:blur(20px)"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:786px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
-<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
-<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:349px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 02 · The pillars</p>
-<h2 id="t-pillars" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:425px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:220px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">Five pillars</h2>
-<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:696px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">Move · Eat · Sleep · Mind · Cut</p>
-<aside>Chapter 02: the pillars. Pause here for a beat before moving on.</aside>
-</section>
-
-<section id="pillars" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1560px;top:96px;width:200px;height:200px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1480px;top:240px;width:64px;height:64px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">The system</p>
-<h2 id="t-pillars" style="position:absolute;left:128px;top:191px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:112px;font-weight:700;line-height:1;text-transform:uppercase">Five pillars</h2>
-<div data-build-in="pop 1 auto" style="position:absolute;left:128px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#C6FF3D">01</p>
-<div style="display:flex;flex-direction:column;gap:12px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Move</h3>
-<p style="font-size:28px;color:#BFC3D1">Daily motion, not punishment.</p>
+<section class="scene" id="blueprint" data-world="grid" data-cam="2,2.6,11|0,-1,-4" data-glow=".35" data-ch="4" data-notes="Walk the audience through the day, left to right."><div class="abs k" style="left:140px;top:128px">The blueprint</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">One ordinary, powerful day.</h2><svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080"><line class="dayl" x1="140" y1="560" x2="1780" y2="560" stroke="#F2EFE8" stroke-opacity=".4" stroke-width="2"/></svg><div class="ev" data-x="231"><i class="abs evd" style="left:222px;top:551px;background:#C6FF3D"></i><i class="abs evl" style="left:231px;top:500px;height:58px"></i><div class="abs mono evt" style="left:101px;top:420px;width:260px;color:#C6FF3D">07:00</div><div class="abs evx" style="left:101px;top:460px;width:260px">Wake up + a glass of water</div></div><div class="ev" data-x="322"><i class="abs evd" style="left:313px;top:551px;background:#FF5A36"></i><i class="abs evl" style="left:322px;top:578px;height:30px"></i><div class="abs mono evt" style="left:192px;top:612px;width:260px;color:#FF5A36">08:00</div><div class="abs evx" style="left:192px;top:652px;width:260px">Breakfast with protein</div></div><div class="ev" data-x="732"><i class="abs evd" style="left:723px;top:551px;background:#C6FF3D"></i><i class="abs evl" style="left:732px;top:500px;height:58px"></i><div class="abs mono evt" style="left:602px;top:420px;width:260px;color:#C6FF3D">12:30</div><div class="abs evx" style="left:602px;top:460px;width:260px">10-minute walk after lunch</div></div><div class="ev" data-x="1233"><i class="abs evd" style="left:1224px;top:551px;background:#FF5A36"></i><i class="abs evl" style="left:1233px;top:578px;height:30px"></i><div class="abs mono evt" style="left:1103px;top:612px;width:260px;color:#FF5A36">18:00</div><div class="abs evx" style="left:1103px;top:652px;width:260px">30 minutes of real movement</div></div><div class="ev" data-x="1552"><i class="abs evd" style="left:1543px;top:551px;background:#C6FF3D"></i><i class="abs evl" style="left:1552px;top:500px;height:58px"></i><div class="abs mono evt" style="left:1422px;top:420px;width:260px;color:#C6FF3D">21:30</div><div class="abs evx" style="left:1422px;top:460px;width:260px">Screens off, lights low</div></div><div class="ev" data-x="1689"><i class="abs evd" style="left:1680px;top:551px;background:#FF5A36"></i><i class="abs evl" style="left:1689px;top:578px;height:30px"></i><div class="abs mono evt" style="left:1559px;top:612px;width:260px;color:#FF5A36">23:00</div><div class="abs evx" style="left:1559px;top:652px;width:260px">Sleep. Repeat tomorrow.</div></div><i class="abs sun"></i><div class="abs mono" style="left:140px;top:590px;color:#4A4F5E" data-f="1">06:00</div><div class="abs mono" style="left:1700px;top:590px;color:#4A4F5E" data-f="1">24:00</div><p class="abs h3 tagl" style="left:140px;top:820px;width:1640px">Nothing extreme. Just the five pillars, scheduled.</p></section>
+<section class="scene" id="activity" data-world="grid" data-cam="-2,2,9|0,-1,-4" data-glow=".3" data-ch="4" data-notes="Press Start. Give students paper or phones. Ask 2–3 volunteers to share their one habit and their stage of change."><div class="abs k" style="left:140px;top:128px">Class activity · 10 minutes</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Your turn: audit your day.</h2><div class="abs act" style="left:140px;top:380px;width:820px"><svg class="abs" style="left:0;top:0" width="820" height="2"><line x1="0" y1="1" x2="820" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">0–3</div><div class="abs t" style="left:150px;top:22px">Map it</div><div class="abs d" style="left:150px;top:84px;width:660px">Write down yesterday, hour by hour.</div></div><div class="abs act" style="left:140px;top:550px;width:820px"><svg class="abs" style="left:0;top:0" width="820" height="2"><line x1="0" y1="1" x2="820" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#FF5A36">3–6</div><div class="abs t" style="left:150px;top:22px">Score it</div><div class="abs d" style="left:150px;top:84px;width:660px">Mark each of the five pillars: hit or miss.</div></div><div class="abs act" style="left:140px;top:720px;width:820px"><svg class="abs" style="left:0;top:0" width="820" height="2"><line x1="0" y1="1" x2="820" y2="1" stroke="#F2EFE8" stroke-opacity=".25"/></svg><div class="abs mono n" style="left:0;top:34px;color:#C6FF3D">6–10</div><div class="abs t" style="left:150px;top:22px">Share it</div><div class="abs d" style="left:150px;top:84px;width:660px">Pick ONE habit. Name your stage of change. Tell your neighbour.</div></div><svg class="abs" style="left:1100px;top:290px" width="600" height="600" viewBox="0 0 600 600">
+<circle class="tr" cx="300" cy="300" r="260" fill="none" stroke="#F2EFE8" stroke-opacity=".12" stroke-width="10"/>
+<circle class="tring" cx="300" cy="300" r="260" fill="none" stroke="#C6FF3D" stroke-width="10" transform="rotate(-90 300 300)"/>
+<line x1="300" y1="22" x2="300" y2="52" stroke="#F2EFE8" stroke-width="3" transform="rotate(108 300 300)"/><line x1="300" y1="22" x2="300" y2="52" stroke="#F2EFE8" stroke-width="3" transform="rotate(216 300 300)"/></svg>
+<div class="abs timer num" style="left:1100px;top:500px;width:600px">10:00</div>
+<button class="abs tbtn mono" data-ui style="left:1310px;top:920px;width:180px">Start</button></section>
+<section class="scene" id="debate" data-world="drift" data-cam="0,0,12" data-glow=".3" data-ch="4" data-notes="No right answer. Push students to use the rainbow model. In Ulaanbaatar: think of winter air pollution and how it limits outdoor exercise."><div class="abs k" style="left:140px;top:128px">Discussion · 5 minutes in pairs</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Personal choice — or social privilege?</h2><div class="abs beam" style="left:360px;top:330px;width:1200px"><i></i></div><i class="abs piv" style="left:946px;top:332px"></i>
+<svg class="abs" style="left:959px;top:390px" width="2" height="520"><line class="mid" x1="1" y1="0" x2="1" y2="520" stroke="#F2EFE8" stroke-opacity=".3" stroke-width="2"/></svg>
+<div class="abs side l" style="left:140px;top:430px;width:760px"><div class="sw" style="color:#C6FF3D">Choice</div><p>Walking, sleep and water cost nothing. Daily decisions are ours to make.</p></div>
+<div class="abs side r" style="left:1020px;top:430px;width:760px"><div class="sw" style="color:#FF5A36">Privilege</div><p>Income, food prices, work hours, air quality and safe streets limit what is possible.</p></div>
+<p class="abs mono prm" style="left:140px;top:950px;width:1640px;text-align:center;color:#C6FF3D">Use the rainbow model: which layers make it easier — or harder — for you?</p></section>
+<section class="scene" id="quiz" data-world="grid" data-cam="0,2,10|0,-1,-4" data-glow=".3" data-ch="4" data-notes="Ask the class first, then press → to reveal each answer. Bonus: which stage of change is “I start next Monday”? (Preparation)"><div class="abs k" style="left:140px;top:128px">Quick check</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Four questions.</h2><div class="abs qr" style="left:140px;top:340px;width:1640px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".2"/></svg><div class="abs mono n" style="left:0;top:46px">01</div><div class="abs qq" style="left:100px;top:36px;width:1000px">WHO defines health as well-being in which three areas?</div><div class="abs qa" style="left:1160px;top:30px;width:480px"><span class="qm mono">?</span><span class="qv">Physical · mental · social</span></div></div><div class="abs qr" style="left:140px;top:490px;width:1640px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".2"/></svg><div class="abs mono n" style="left:0;top:46px">02</div><div class="abs qq" style="left:100px;top:36px;width:1000px">Share of non-pandemic deaths caused by NCDs?</div><div class="abs qa" style="left:1160px;top:30px;width:480px"><span class="qm mono">?</span><span class="qv" data-n=75>75%</span></div></div><div class="abs qr" style="left:140px;top:640px;width:1640px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".2"/></svg><div class="abs mono n" style="left:0;top:46px">03</div><div class="abs qq" style="left:100px;top:36px;width:1000px">Weekly activity minimum for adults?</div><div class="abs qa" style="left:1160px;top:30px;width:480px"><span class="qm mono">?</span><span class="qv" data-n=150>150 min</span></div></div><div class="abs qr" style="left:140px;top:790px;width:1640px"><svg class="abs" style="left:0;top:0" width="1640" height="2"><line x1="0" y1="1" x2="1640" y2="1" stroke="#F2EFE8" stroke-opacity=".2"/></svg><div class="abs mono n" style="left:0;top:46px">04</div><div class="abs qq" style="left:100px;top:36px;width:1000px">Median days for a habit to feel automatic?</div><div class="abs qa" style="left:1160px;top:30px;width:480px"><span class="qm mono">?</span><span class="qv" data-n=66>66 days</span></div></div></section>
+<section class="scene" id="close" data-world="sphere" data-cam="-3.1,0.2,11|-3.1,0,0" data-glow="1" data-ch="5" data-notes="End on the call to action. Ask everyone to pick one habit tonight."><div class="abs k" style="left:140px;top:300px">Not Monday. Not January.</div><h1 class="abs d1" style="left:128px;top:345px;width:1100px">Start<br>today.</h1><p class="abs b c1" style="left:140px;top:770px;width:900px;color:#F2EFE8">One walk. One glass of water. One early night.</p><div class="abs mono c2" style="left:140px;top:860px;color:#C6FF3D;font-size:26px">Thank you — questions?</div></section>
+<section class="scene" id="sources" data-world="drift" data-cam="0,0,16" data-glow=".3" data-ch="5" data-notes="Leave this up during questions."><div class="abs k" style="left:140px;top:128px">References</div><h2 class="abs h3 hh" style="left:136px;top:168px;width:1500px">Sources.</h2><div class="abs refs" style="left:140px;top:300px;width:1640px"><p>Arnett, J. J. (2000). Emerging adulthood. <i>American Psychologist, 55</i>(5), 469–480.</p><p>Dahlgren, G., &amp; Whitehead, M. (1991). <i>Policies and strategies to promote social equity in health.</i> Institute for Futures Studies.</p><p>Harvard T.H. Chan School of Public Health. <i>Healthy Eating Plate.</i></p><p>Lally, P., et al. (2010). How are habits formed? <i>European Journal of Social Psychology, 40</i>(6), 998–1009.</p><p>Nelson, M. C., et al. (2008). Emerging adulthood and college-aged youth. <i>Obesity, 16</i>(10), 2205–2211.</p><p>Prochaska, J. O., &amp; DiClemente, C. C. (1983). Stages and processes of self-change of smoking. <i>J. Consulting &amp; Clinical Psychology, 51</i>(3), 390–395.</p><p>Watson, N. F., et al. (2015). Recommended amount of sleep for a healthy adult. <i>Sleep, 38</i>(6), 843–844.</p><p>World Health Organization. (1948). <i>Constitution of the World Health Organization.</i></p><p>WHO Regional Office for Europe. (1999). <i>Healthy living: What is a healthy lifestyle?</i></p><p>World Health Organization. (2020). <i>Guidelines on physical activity and sedentary behaviour.</i></p><p>World Health Organization. (2025). <i>Noncommunicable diseases</i> — fact sheet.</p></div></section>
+<div id="chrome">
+<svg class="abs crop" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" stroke="rgba(242,239,232,.35)" stroke-width="1.5">
+<path d="M70 100 V70 H100"/><path d="M1820 70 H1850 V100"/><path d="M1850 980 V1010 H1820"/><path d="M100 1010 H70 V980"/></svg>
+<div id="brand" class="abs mono">Healthy Lifestyle <span>/ Human Development</span></div>
+<div id="chap" class="abs mono">Intro</div>
+<div id="trk" class="abs"><div id="fill"></div></div>
+<div id="cnt" class="abs mono num">01 / 25</div>
+<div id="help" class="abs mono">→ next · ← back · N notes · F fullscreen</div>
 </div>
 </div>
-<div data-build-in="pop 2 auto" style="position:absolute;left:464px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#FF5A36">02</p>
-<div style="display:flex;flex-direction:column;gap:12px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Eat</h3>
-<p style="font-size:28px;color:#BFC3D1">Real food, mostly plants.</p>
-</div>
-</div>
-<div data-build-in="pop 3 auto" style="position:absolute;left:800px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#C6FF3D">03</p>
-<div style="display:flex;flex-direction:column;gap:12px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Sleep</h3>
-<p style="font-size:28px;color:#BFC3D1">The free performance drug.</p>
-</div>
-</div>
-<div data-build-in="pop 4 auto" style="position:absolute;left:1136px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#FF5A36">04</p>
-<div style="display:flex;flex-direction:column;gap:12px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Mind</h3>
-<p style="font-size:28px;color:#BFC3D1">Calm head, real people.</p>
-</div>
-</div>
-<div data-build-in="pop 5 auto" style="position:absolute;left:1472px;top:440px;width:312px;height:420px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:96px">
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1;color:#C6FF3D">05</p>
-<div style="display:flex;flex-direction:column;gap:12px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;text-transform:uppercase">Cut</h3>
-<p style="font-size:28px;color:#BFC3D1">Drop what drains you.</p>
-</div>
-</div>
-<aside>Five pillars. Each one gets its own slide next.</aside>
-</section>
-
-<section id="move" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:128px;top:220px;width:640px;height:640px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:660px;top:200px;width:120px;height:120px;background:#FF5A36"></x-shape>
-<p data-build-in="pop 1 auto" style="position:absolute;left:128px;top:339px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:340px;font-weight:700;line-height:1;text-align:center">150</p>
-<p data-build-in="fade 2 auto" style="position:absolute;left:128px;top:679px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;text-transform:uppercase;text-align:center">minutes / week</p>
-<div style="position:absolute;left:944px;top:287px;width:848px;display:flex;flex-direction:column;gap:32px">
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">01 / Move</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Sit less. Move more.</h2>
-<p style="font-size:32px;color:#3A3D4D">The WHO minimum for adults: 150–300 minutes of moderate activity a week, plus strength work twice a week.</p>
-<p style="font-size:32px;color:#3A3D4D"><b>That is just 22 minutes a day.</b> A brisk walk counts.</p>
-</div>
-<aside>150 minutes sounds like a lot. Divide by seven: about 22 minutes a day.</aside>
-</section>
-
-<section id="eat" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:230px;width:48px;height:48px;background:#C6FF3D"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#FF5A36">02 / Eat</p>
-<svg aria-label="Plate split into half vegetables and fruit, a quarter whole grains, a quarter protein" data-build-in="scale 1 auto" viewBox="0 0 600 600" width="600" height="600" style="position:absolute;left:128px;top:300px;width:600px;height:600px"><path d="M300 300 L300 0 A300 300 0 0 0 300 600 Z" fill="#C6FF3D"/><path d="M300 300 L300 0 A300 300 0 0 1 600 300 Z" fill="#FF5A36"/><path d="M300 300 L600 300 A300 300 0 0 1 300 600 Z" fill="#F4F1EA"/><circle cx="300" cy="300" r="296" fill="none" stroke="#0E0F1A" stroke-width="8"/><line x1="300" y1="0" x2="300" y2="600" stroke="#0E0F1A" stroke-width="8"/><line x1="300" y1="300" x2="600" y2="300" stroke="#0E0F1A" stroke-width="8"/></svg>
-<p data-build-in="fade 2 auto" style="position:absolute;left:148px;top:570px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;color:#0E0F1A;text-align:center">VEG + FRUIT</p>
-<p data-build-in="fade 3 auto" style="position:absolute;left:458px;top:420px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;color:#0E0F1A;text-align:center">GRAINS</p>
-<p data-build-in="fade 4 auto" style="position:absolute;left:458px;top:720px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;color:#0E0F1A;text-align:center">PROTEIN</p>
-<div data-build-in="rise 5 auto" style="position:absolute;left:840px;top:300px;width:900px;display:flex;flex-direction:column;gap:32px">
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Build the plate, skip the diet.</h2>
-<p style="font-size:32px;color:#BFC3D1"><span style="color:#C6FF3D">■</span> Half the plate: vegetables and fruit — aim for 5 portions a day.</p>
-<p style="font-size:32px;color:#BFC3D1"><span style="color:#FF5A36">■</span> Water first. Sugary drinks last.</p>
-<p style="font-size:32px;color:#BFC3D1"><span style="color:#F4F1EA">■</span> Cook more. Ultra-processed less.</p>
-</div>
-<aside>Use the plate, not a calorie app. Half veg and fruit, a quarter whole grains, a quarter protein.</aside>
-</section>
-
-<section id="sleep" data-transition="magic" style="background:#12142B;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1380px;top:110px;width:380px;height:380px;background:#F4F1EA"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1290px;top:70px;width:360px;height:360px;background:#12142B"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">03 / Sleep</p>
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:300px;font-weight:700;line-height:1;color:#C6FF3D">7–9</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1;text-transform:uppercase">Hours. Non-negotiable.</h2>
-<p data-build-in="rise 1 auto" style="position:absolute;left:128px;top:846px;width:533px;font-size:30px;background:#1F2244;padding:32px;border-radius:16px">Same wake-up time, every day</p>
-<p data-build-in="rise 2 auto" style="position:absolute;left:693px;top:846px;width:533px;font-size:30px;background:#1F2244;padding:32px;border-radius:16px">Screens off 60 min before bed</p>
-<p data-build-in="rise 3 auto" style="position:absolute;left:1259px;top:846px;width:533px;font-size:30px;background:#1F2244;padding:32px;border-radius:16px">Cool, dark, quiet room</p>
-<aside>Adults need 7 to 9 hours. Consistency of wake-up time matters more than bedtime.</aside>
-</section>
-
-<section id="mind" data-transition="magic" style="background:#FF5A36;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1440px;top:540px;width:360px;height:360px;background:#0E0F1A"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1380px;top:480px;width:96px;height:96px;background:#C6FF3D"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase">04 / Mind</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:136px;font-weight:700;line-height:1;text-transform:uppercase;width:1240px">Stress is a signal. Not a lifestyle.</h2>
-<p data-build-in="left 1 auto" style="position:absolute;left:128px;top:640px;width:1200px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;text-transform:uppercase">01 · Breathe slowly for 2 minutes</p>
-<p data-build-in="left 2 auto" style="position:absolute;left:128px;top:720px;width:1200px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;text-transform:uppercase">02 · Get outside, daylight, 20 minutes</p>
-<p data-build-in="left 3 auto" style="position:absolute;left:128px;top:800px;width:1200px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;text-transform:uppercase">03 · Talk to a real human, not a feed</p>
-<aside>Mental health is a pillar, not an extra. People and nature are the cheapest medicine.</aside>
-</section>
-
-<section id="cut" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1520px;top:680px;width:240px;height:240px;background:#FF5A36"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1600px;top:120px;width:80px;height:80px;background:#C6FF3D"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">05 / Cut</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Cut the noise</h2>
-<p data-build-in="right 1 auto" style="position:absolute;left:128px;top:400px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Smoking</p>
-<p data-build-in="right 2 auto" style="position:absolute;left:128px;top:520px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Excess alcohol</p>
-<p data-build-in="right 3 auto" style="position:absolute;left:128px;top:640px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Sitting all day</p>
-<p data-build-in="right 4 auto" style="position:absolute;left:128px;top:760px;width:1300px;font-family:'Oswald', Arial, sans-serif;font-size:84px;font-weight:700;line-height:1.1;text-transform:uppercase;text-decoration:line-through solid #FF5A36">Scrolling at 1 AM</p>
-<aside>Healthy living is also about subtraction. Pick one of these to cut first.</aside>
-</section>
-
-<section id="ch3" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#C6FF3D;opacity:0.22;filter:blur(20px)"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:741px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
-<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
-<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:392px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 03 · Human development</p>
-<h2 id="t-lifespan" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:468px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:136px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">Why your twenties matter</h2>
-<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:651px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">Life stage, behaviour change and how habits form</p>
-<aside>Chapter 03: human development. Pause here for a beat before moving on.</aside>
-</section>
-
-<section id="lifespan" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">Human development lens</p>
-<h2 id="t-lifespan" style="position:absolute;left:128px;top:191px;width:1400px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Why your twenties matter</h2>
-<p data-build-in="rise 1 auto" style="position:absolute;left:128px;top:450px;width:326px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">CHILDHOOD 0–12</p>
-<p data-build-in="rise 2 auto" style="position:absolute;left:462px;top:450px;width:261px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">TEENS 12–18</p>
-<p data-build-in="pop 3 auto" style="position:absolute;left:731px;top:450px;width:359px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;background:#C6FF3D;border-radius:12px;padding:28px;box-shadow:0 12px 32px rgba(14,15,26,0.25)">EMERGING ADULT 18–25</p>
-<p data-build-in="rise 4 auto" style="position:absolute;left:1098px;top:450px;width:424px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">ADULTHOOD 25–65</p>
-<p data-build-in="rise 5 auto" style="position:absolute;left:1530px;top:450px;width:262px;font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:600;background:#E2DED3;border-radius:12px;padding:28px">LATER LIFE 65+</p>
-<p data-build-in="drop 6 auto" style="position:absolute;left:790px;top:372px;width:240px;font-family:'Oswald', Arial, sans-serif;font-size:24px;font-weight:700;letter-spacing:2px;text-align:center;background:#0E0F1A;color:#C6FF3D;border-radius:999px;padding:6px 16px">YOU ARE HERE ↓</p>
-<div data-build-in="rise 7 auto" style="position:absolute;left:128px;top:660px;width:528px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C2361A">A new life stage</h3>
-<p style="font-size:30px;color:#3A3D4D">Arnett (2000) named 18–25 “emerging adulthood”: a time of exploration and instability.</p>
-</div>
-<div data-build-in="rise 8 auto" style="position:absolute;left:696px;top:660px;width:528px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C2361A">First real control</h3>
-<p style="font-size:30px;color:#3A3D4D">For many, the first years of choosing your own food, sleep, money and substances.</p>
-</div>
-<div data-build-in="rise 9 auto" style="position:absolute;left:1264px;top:660px;width:528px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C2361A">Habits that stick</h3>
-<p style="font-size:30px;color:#3A3D4D">Patterns set in this window often carry into adulthood — a key time to intervene (Nelson et al., 2008).</p>
-</div>
-<aside>Ask: who here cooks for themselves now? Who sleeps less than at school? University is exactly the stage where lifestyle gets "locked in".</aside>
-</section>
-
-<section id="change" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:16px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#C6FF3D"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Theory · Prochaska &amp; DiClemente (1983)</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1;text-transform:uppercase;width:1300px">Change happens in stages</h2>
-<div data-build-in="rise 1 auto" style="position:absolute;left:128px;top:720px;width:312px;height:200px;background:#1C1E2E;border-top:8px solid #8B90A6;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Precontemplation</h3>
-<p style="font-size:24px;color:#BFC3D1">“I don't see a problem.”</p>
-</div>
-<div data-build-in="rise 2 auto" style="position:absolute;left:464px;top:640px;width:312px;height:280px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Contemplation</h3>
-<p style="font-size:24px;color:#BFC3D1">“Maybe I should…”</p>
-</div>
-<div data-build-in="rise 3 auto" style="position:absolute;left:800px;top:560px;width:312px;height:360px;background:#1C1E2E;border-top:8px solid #FF5A36;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Preparation</h3>
-<p style="font-size:24px;color:#BFC3D1">“I start next Monday.” A concrete plan.</p>
-</div>
-<div data-build-in="rise 4 auto" style="position:absolute;left:1136px;top:480px;width:312px;height:440px;background:#1C1E2E;border-top:8px solid #C6FF3D;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase">Action</h3>
-<p style="font-size:24px;color:#BFC3D1">Doing it, for less than 6 months.</p>
-</div>
-<div data-build-in="rise 5 auto" style="position:absolute;left:1472px;top:400px;width:312px;height:520px;background:#C6FF3D;border-top:8px solid #C6FF3D;border-radius:16px 16px 0 0;padding:24px;display:flex;flex-direction:column;gap:8px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:30px;font-weight:700;text-transform:uppercase;color:#0E0F1A">Maintenance</h3>
-<p style="font-size:24px;color:#0E0F1A">6+ months. It's now part of who you are.</p>
-</div>
-<aside>The Transtheoretical Model. People move up and down these steps; relapse is normal, not failure. Different stages need different help: information early, planning in the middle, support at the end.</aside>
-</section>
-
-<section id="habit" data-transition="magic" style="background:#C6FF3D;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:28px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:128px;top:220px;width:640px;height:640px;background:#0E0F1A"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:680px;top:200px;width:110px;height:110px;background:#FF5A36"></x-shape>
-<p data-build-in="pop 1 auto" style="position:absolute;left:128px;top:329px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:360px;font-weight:700;line-height:1;color:#C6FF3D;text-align:center">66</p>
-<p data-build-in="fade 2 auto" style="position:absolute;left:128px;top:689px;width:640px;font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F4F1EA;text-align:center">DAYS</p>
-<div style="position:absolute;left:968px;top:281px;width:824px;display:flex;flex-direction:column;gap:28px">
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase">Research · Lally et al. (2010)</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1;text-transform:uppercase">Habits take longer than 21 days</h2>
-<p style="font-size:32px">The median time for a new daily behaviour to feel automatic — with a range of <b>18 to 254 days</b>.</p>
-<p style="font-size:32px">Missing a single day did not ruin the process.</p>
-<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:700;text-transform:uppercase">Consistency beats intensity.</p>
-</div>
-<aside>The "21 days" idea is a myth. 96 participants built habits like drinking water or a short run; it took a median of 66 days. Be patient with yourself.</aside>
-</section>
-
-<section id="ch4" data-transition="magic" style="background:#07080F;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:510px;top:90px;width:900px;height:900px;background:#FF5A36;opacity:0.22;filter:blur(20px)"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:936px;top:736px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<div style="position:absolute;left:0px;top:0px;width:1920px;height:88px;background:#030308"></div>
-<div style="position:absolute;left:0px;top:992px;width:1920px;height:88px;background:#030308"></div>
-<p data-build-in="fade 1 auto" style="position:absolute;left:128px;top:396px;width:1664px;font-size:28px;font-weight:700;letter-spacing:24px;text-align:center;text-transform:uppercase;color:#C6FF3D">Chapter 04 · Put it to work</p>
-<h2 id="t-blueprint" data-build-in="scale 2 auto" style="position:absolute;left:128px;top:472px;width:1664px;font-family:'Oswald', Arial, sans-serif;font-size:128px;font-weight:700;line-height:1.05;text-align:center;text-transform:uppercase;text-shadow:0 0 48px rgba(198,255,61,0.35)">One ordinary, powerful day</h2>
-<p data-build-in="rise 3 auto" style="position:absolute;left:128px;top:646px;width:1664px;font-size:32px;text-align:center;color:#BFC3D1">A routine, a class activity and a debate</p>
-<aside>Chapter 04: put it to work. Pause here for a beat before moving on.</aside>
-</section>
-
-<section id="blueprint" data-transition="magic" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">The blueprint</p>
-<h2 id="t-blueprint" style="position:absolute;left:128px;top:191px;width:1400px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">One ordinary, powerful day</h2>
-<hr style="position:absolute;left:128px;top:540px;width:1664px;border-top:4px solid #3A3D55">
-<x-shape kind="ellipse" data-build-in="pop 1 auto" style="position:absolute;left:250px;top:526px;width:32px;height:32px;background:#C6FF3D"></x-shape>
-<p data-build-in="rise 1 auto" style="position:absolute;left:136px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#C6FF3D;text-align:center">07:00</p>
-<p data-build-in="rise 1 auto" style="position:absolute;left:136px;top:590px;width:260px;font-size:28px;text-align:center">Wake up + a glass of water</p>
-<x-shape kind="ellipse" data-build-in="pop 2 auto" style="position:absolute;left:527px;top:526px;width:32px;height:32px;background:#FF5A36"></x-shape>
-<p data-build-in="rise 2 auto" style="position:absolute;left:413px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#FF5A36;text-align:center">08:00</p>
-<p data-build-in="rise 2 auto" style="position:absolute;left:413px;top:590px;width:260px;font-size:28px;text-align:center">Breakfast with protein</p>
-<x-shape kind="ellipse" data-build-in="pop 3 auto" style="position:absolute;left:804px;top:526px;width:32px;height:32px;background:#C6FF3D"></x-shape>
-<p data-build-in="rise 3 auto" style="position:absolute;left:690px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#C6FF3D;text-align:center">12:30</p>
-<p data-build-in="rise 3 auto" style="position:absolute;left:690px;top:590px;width:260px;font-size:28px;text-align:center">10-minute walk after lunch</p>
-<x-shape kind="ellipse" data-build-in="pop 4 auto" style="position:absolute;left:1081px;top:526px;width:32px;height:32px;background:#FF5A36"></x-shape>
-<p data-build-in="rise 4 auto" style="position:absolute;left:967px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#FF5A36;text-align:center">18:00</p>
-<p data-build-in="rise 4 auto" style="position:absolute;left:967px;top:590px;width:260px;font-size:28px;text-align:center">30 minutes of real movement</p>
-<x-shape kind="ellipse" data-build-in="pop 5 auto" style="position:absolute;left:1358px;top:526px;width:32px;height:32px;background:#C6FF3D"></x-shape>
-<p data-build-in="rise 5 auto" style="position:absolute;left:1244px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#C6FF3D;text-align:center">21:30</p>
-<p data-build-in="rise 5 auto" style="position:absolute;left:1244px;top:590px;width:260px;font-size:28px;text-align:center">Screens off, lights low</p>
-<x-shape kind="ellipse" data-build-in="pop 6 auto" style="position:absolute;left:1635px;top:526px;width:32px;height:32px;background:#FF5A36"></x-shape>
-<p data-build-in="rise 6 auto" style="position:absolute;left:1521px;top:430px;width:260px;font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;color:#FF5A36;text-align:center">23:00</p>
-<p data-build-in="rise 6 auto" style="position:absolute;left:1521px;top:590px;width:260px;font-size:28px;text-align:center">Sleep. Repeat tomorrow.</p>
-<p style="position:absolute;left:128px;top:820px;width:1664px;font-size:32px;color:#BFC3D1">Nothing extreme. Just the five pillars, scheduled.</p>
-<aside>Walk the audience through the day left to right.</aside>
-</section>
-
-<section id="activity" data-transition="magic" style="background:#12142B;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1420px;top:110px;width:340px;height:340px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1360px;top:380px;width:80px;height:80px;background:#FF5A36"></x-shape>
-<p style="position:absolute;left:1420px;top:220px;width:340px;font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;color:#0E0F1A;text-align:center">10 MIN</p>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Class activity</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase;width:1240px">Your turn: audit your day</h2>
-<div data-build-in="rise 1" style="position:absolute;left:128px;top:560px;width:528px;height:300px;background:#1F2244;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C6FF3D">1 · Map it</h3>
-<p style="font-size:28px">Write down yesterday, hour by hour. (3 min)</p>
-</div>
-<div data-build-in="rise 2" style="position:absolute;left:696px;top:560px;width:528px;height:300px;background:#1F2244;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#FF5A36">2 · Score it</h3>
-<p style="font-size:28px">Mark each of the 5 pillars: hit or miss. (3 min)</p>
-</div>
-<div data-build-in="rise 3" style="position:absolute;left:1264px;top:560px;width:528px;height:300px;background:#1F2244;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:700;text-transform:uppercase;color:#C6FF3D">3 · Share it</h3>
-<p style="font-size:28px">Pick ONE habit. Name your stage of change. Tell your neighbour. (4 min)</p>
-</div>
-<aside>Click to reveal each step. Give students paper or let them use their phones. Ask 2–3 volunteers to share their one habit.</aside>
-</section>
-
-<section id="debate" data-transition="magic" style="background:#12142B;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#C6FF3D"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">Discussion · 5 min in pairs</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.05;text-transform:uppercase;width:1350px">Healthy lifestyle: personal choice or social privilege?</h2>
-<div data-build-in="left 1 auto" style="position:absolute;left:128px;top:460px;width:812px;height:300px;background:#1F2244;border-top:8px solid #C6FF3D;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;text-transform:uppercase;color:#C6FF3D">Choice</h3>
-<p style="font-size:32px;color:#BFC3D1">Walking, sleep and water cost nothing. Daily decisions are ours to make.</p>
-</div>
-<div data-build-in="right 2 auto" style="position:absolute;left:980px;top:460px;width:812px;height:300px;background:#1F2244;border-top:8px solid #FF5A36;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
-<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:700;text-transform:uppercase;color:#FF5A36">Privilege</h3>
-<p style="font-size:32px;color:#BFC3D1">Income, food prices, work hours, air quality and safe streets limit what is possible.</p>
-</div>
-<x-shape kind="ellipse" data-build-in="pop 3 auto" style="position:absolute;left:910px;top:560px;width:100px;height:100px;background:#F4F1EA"></x-shape>
-<p data-build-in="pop 3 auto" style="position:absolute;left:910px;top:583px;width:100px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;color:#12142B">VS</p>
-<p data-build-in="fade 4 auto" style="position:absolute;left:128px;top:820px;width:1664px;font-size:32px;color:#C6FF3D">Use the rainbow model: which layers make it easier — or harder — for you?</p>
-<aside>No right answer. Push students to use the rainbow model. In Ulaanbaatar: think of winter air pollution and how it limits outdoor exercise.</aside>
-</section>
-
-<section id="quiz" data-transition="magic" style="background:#F4F1EA;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:24px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#FF5A36"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#C6FF3D"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C2361A">Quick check</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:96px;font-weight:700;line-height:1;text-transform:uppercase">Pop quiz</h2>
-<p style="position:absolute;left:128px;top:376px;width:1100px;font-size:36px;font-weight:600">1. WHO defines health as well-being in which three areas?</p>
-<p data-build-in="pop 1" style="position:absolute;left:1300px;top:360px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">PHYSICAL · MENTAL · SOCIAL</p>
-<p style="position:absolute;left:128px;top:516px;width:1100px;font-size:36px;font-weight:600">2. What share of non-pandemic deaths are caused by NCDs?</p>
-<p data-build-in="pop 2" style="position:absolute;left:1300px;top:500px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">ABOUT 75%</p>
-<p style="position:absolute;left:128px;top:656px;width:1100px;font-size:36px;font-weight:600">3. Weekly activity minimum for adults (WHO)?</p>
-<p data-build-in="pop 3" style="position:absolute;left:1300px;top:640px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">150 MINUTES</p>
-<p style="position:absolute;left:128px;top:796px;width:1100px;font-size:36px;font-weight:600">4. Median days for a habit to become automatic?</p>
-<p data-build-in="pop 4" style="position:absolute;left:1300px;top:780px;width:492px;font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:700;text-align:center;background:#C6FF3D;padding:16px;border-radius:999px">66 DAYS</p>
-<aside>Ask the class first, then click to reveal each answer. Bonus question: name the stage of change where someone "plans to start next Monday" (Preparation).</aside>
-</section>
-
-<section id="close" data-transition="magic" style="background:#C6FF3D;color:#0E0F1A;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1140px;top:200px;width:660px;height:660px;background:#0E0F1A"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1080px;top:760px;width:140px;height:140px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;width:960px">Not Monday. Not January.</p>
-<h1 style="font-family:'Oswald', Arial, sans-serif;font-size:240px;font-weight:700;line-height:0.95;text-transform:uppercase;width:960px">Start today.</h1>
-<p style="font-size:36px;width:920px">One walk. One glass of water. One early night.</p>
-<p data-build-in="pop 1 auto" style="position:absolute;left:1240px;top:492px;width:460px;font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:700;color:#C6FF3D;text-align:center;text-transform:uppercase">Thank you</p>
-<aside>End on the call to action. Ask everyone to pick one habit tonight.</aside>
-</section>
-
-<section id="sources" style="background:#0E0F1A;color:#F4F1EA;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:14px">
-<x-shape id="orb" kind="ellipse" style="position:absolute;left:1600px;top:96px;width:160px;height:160px;background:#C6FF3D"></x-shape>
-<x-shape id="dot" kind="ellipse" style="position:absolute;left:1540px;top:220px;width:48px;height:48px;background:#FF5A36"></x-shape>
-<p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C6FF3D">References</p>
-<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1;text-transform:uppercase">Sources</h2>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Arnett, J. J. (2000). Emerging adulthood. <i>American Psychologist, 55</i>(5), 469–480.</p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Dahlgren, G., &amp; Whitehead, M. (1991). <i>Policies and strategies to promote social equity in health.</i> Institute for Futures Studies.</p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Harvard T.H. Chan School of Public Health. <i>Healthy Eating Plate.</i></p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Lally, P., et al. (2010). How are habits formed? <i>European Journal of Social Psychology, 40</i>(6), 998–1009.</p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Nelson, M. C., et al. (2008). Emerging adulthood and college-aged youth. <i>Obesity, 16</i>(10), 2205–2211.</p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Prochaska, J. O., &amp; DiClemente, C. C. (1983). Stages and processes of self-change of smoking. <i>J. Consulting &amp; Clinical Psychology, 51</i>(3), 390–395.</p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">Watson, N. F., et al. (2015). Recommended amount of sleep for a healthy adult. <i>Sleep, 38</i>(6), 843–844.</p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">World Health Organization. (1948). <i>Constitution of the World Health Organization.</i></p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">WHO Regional Office for Europe. (1999). <i>Healthy living: What is a healthy lifestyle?</i></p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">World Health Organization. (2020). <i>Guidelines on physical activity and sedentary behaviour.</i></p>
-<p style="font-size:24px;color:#BFC3D1;width:1440px">World Health Organization. (2025). <i>Noncommunicable diseases</i> — fact sheet.</p>
-<aside>Leave this up during questions.</aside>
-</section>
-
-</div>
-<div id="ui"><div id="bar"></div></div>
-<div id="hud"><span id="count"></span><button id="bn" title="Speaker notes (N)">Notes</button><button id="bf" title="Fullscreen (F)">Fullscreen</button></div>
-<div id="notes"></div>
-<div id="help">→ / Space / click: next &nbsp;·&nbsp; ← : back &nbsp;·&nbsp; F: fullscreen &nbsp;·&nbsp; N: notes</div>
+<div id="notes"><b>SPEAKER NOTES</b><span></span></div>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/DrawSVGPlugin.min.js"></script>
+<script src="vendor/MorphSVGPlugin.min.js"></script>
+<script src="vendor/world.js"></script>
 <script>
 (() => {
-const stage = document.getElementById('stage');
-const S = [...stage.querySelectorAll(':scope > section')];
-const EASE = 'cubic-bezier(.65,0,.35,1)';
-const OUT = 'cubic-bezier(.2,.8,.2,1)';
-let cur = -1, steps = [], stepIx = 0, timers = [], busy = false;
+gsap.registerPlugin(SplitText, DrawSVGPlugin, MorphSVGPlugin);
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const stage = $('#stage'), scenes = $$('.scene'), N = scenes.length;
+const CHN = ['Intro', '01 — The concept', '02 — The pillars', '03 — Human development', '04 — Put it to work', 'Close'];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W = null;
+try { W = World.createWorld($('#world')); } catch (e) { document.body.classList.add('nogl'); }
 
-function fit() {
-  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
-  stage.style.transform = `scale(${k}) translate(-50%, -50%)`;
-}
+let K = 1;
+function fit() { K = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = `translate(-50%,-50%) scale(${K})`; }
 addEventListener('resize', fit); fit();
 
-const KF = {
-  fade: [{opacity:0},{opacity:1}],
-  rise: [{opacity:0,translate:'0 48px'},{opacity:1,translate:'0 0'}],
-  drop: [{opacity:0,translate:'0 -48px'},{opacity:1,translate:'0 0'}],
-  left: [{opacity:0,translate:'-96px 0'},{opacity:1,translate:'0 0'}],
-  right:[{opacity:0,translate:'96px 0'},{opacity:1,translate:'0 0'}],
-  scale:[{opacity:0,scale:'0.82'},{opacity:1,scale:'1'}],
-  pop:  [{opacity:0,scale:'0.55'},{opacity:1,scale:'1.07',offset:.7},{opacity:1,scale:'1'}]
-};
-function parse(el) {
-  const t = (el.dataset.buildIn || '').trim().split(/\s+/);
-  return {el, type: KF[t[0]] ? t[0] : 'fade', order: parseInt(t[1]) || 1, auto: t.includes('auto')};
+// ---------- motion vocabulary ----------
+const OUT = 'expo.out';
+function lines(tl, el, at = 0, st = .09) { if (!el) return; const sp = SplitText.create(el, { type: 'lines', mask: 'lines' }); tl.from(sp.lines, { yPercent: 115, duration: 1.15, ease: OUT, stagger: st }, at); }
+function words(tl, el, at = 0, st = .06) { if (!el) return; const sp = SplitText.create(el, { type: 'words' }); tl.from(sp.words, { opacity: 0, filter: 'blur(14px)', y: 16, duration: 1, ease: 'power3.out', stagger: st }, at); }
+function type(tl, el, at = 0) { if (!el) return; const sp = SplitText.create(el, { type: 'chars' }); tl.from(sp.chars, { opacity: 0, duration: .01, stagger: .022, ease: 'none' }, at); }
+function blur(tl, el, at = 0, x = {}) { if (!el) return; tl.from(el, { opacity: 0, filter: 'blur(18px)', scale: 1.03, duration: 1.2, ease: 'power3.out', ...x }, at); }
+function up(tl, el, at = 0, st = .08) { tl.from(el, { opacity: 0, y: 28, duration: .9, ease: 'power3.out', stagger: st }, at); }
+function draw(tl, el, at = 0, d = 1.2, st = 0) { tl.from(el, { drawSVG: 0, duration: d, ease: 'power2.inOut', stagger: st }, at); }
+function count(tl, el, to, at = 0, { d = 1.8, dec = 0, pre = '', suf = '' } = {}) {
+  if (!el) return; const o = { v: 0 }; const f = () => el.textContent = pre + o.v.toFixed(dec) + suf; f();
+  tl.to(o, { v: to, duration: d, ease: 'power2.out', onUpdate: f }, at);
 }
-function buildSteps(sec) {
-  const items = [...sec.querySelectorAll('[data-build-in]')].map(parse).sort((a,b) => a.order - b.order);
-  const groups = [];
-  for (const it of items) {
-    let g = groups.find(g => g.order === it.order);
-    if (!g) groups.push(g = {order: it.order, items: [], auto: true});
-    g.items.push(it.el); if (!it.auto) g.auto = false; g.type = g.type || it.type;
-    it.el._type = it.type;
-  }
-  return groups;
-}
-function play(g) {
-  g.items.forEach(el => {
-    el.classList.remove('pending');
-    el.animate(KF[el._type], {duration: el._type === 'pop' ? 650 : 750, easing: OUT, fill: 'backwards'});
-  });
-}
-function clearTimers() { timers.forEach(clearTimeout); timers = []; }
-function runAuto(delay) {
-  clearTimers();
-  let t = delay;
-  while (stepIx < steps.length && steps[stepIx].auto) {
-    const g = steps[stepIx++];
-    timers.push(setTimeout(() => play(g), t));
-    t += 420;
-  }
-}
-function showAll(sec) { sec.querySelectorAll('[data-build-in]').forEach(el => el.classList.remove('pending')); }
+function header(tl, el) { type(tl, $(':scope > .k', el), 0); lines(tl, $(':scope > .hh', el), .1); }
+function S2(x, y) { const r = stage.getBoundingClientRect(); return [(x - r.left) / K, (y - r.top) / K]; }
 
-function rectOf(el) {
-  const cs = getComputedStyle(el);
-  return {left: el.offsetLeft + 'px', top: el.offsetTop + 'px', width: el.offsetWidth + 'px', height: el.offsetHeight + 'px',
-          backgroundColor: cs.backgroundColor, opacity: cs.opacity, filter: cs.filter === 'none' ? 'blur(0px)' : cs.filter,
-          color: cs.color, fontSize: cs.fontSize, letterSpacing: cs.letterSpacing, textShadow: cs.textShadow};
-}
-
-function go(n, instant) {
-  if (n < 0 || n >= S.length || n === cur || busy) return;
-  clearTimers();
-  const A = S[cur], B = S[n], forward = n > cur;
-  B.querySelectorAll('[data-build-in]').forEach(el => el.classList.add('pending'));
-  steps = buildSteps(B); stepIx = 0;
-  if (!forward) { showAll(B); stepIx = steps.length; }
-  if (!A || instant) {
-    S.forEach(s => s.classList.remove('on')); B.classList.add('on'); B.style.zIndex = 1;
-    cur = n; update(); runAuto(250); return;
-  }
-  busy = true;
-  const magic = (forward ? A : B).dataset.transition === 'magic';
-  const D = 1100;
-  // collect morphing pairs
-  const pairs = [];
-  if (magic) B.querySelectorAll('[id]').forEach(b => {
-    const a = A.querySelector('#' + CSS.escape(b.id)); if (a) pairs.push([a, b]);
-  });
-  const from = pairs.map(([a]) => rectOf(a));
-  const pairedA = new Set(pairs.map(p => p[0])), pairedB = new Set(pairs.map(p => p[1]));
-  // 1. fade out A's own content
-  const aKids = [...A.children].filter(c => !pairedA.has(c));
-  aKids.forEach(c => c.animate([{opacity: getComputedStyle(c).opacity},{opacity:0}], {duration: 280, easing: 'ease-in', fill: 'forwards'}));
-  setTimeout(() => {
-    B.classList.add('on'); B.style.zIndex = 2; A.style.zIndex = 1;
-    const bgA = getComputedStyle(A).backgroundColor, bgB = getComputedStyle(B).backgroundColor;
-    B.animate([{backgroundColor: bgA},{backgroundColor: bgB}], {duration: D, easing: EASE});
-    pairs.forEach(([a, b], i) => {
-      const to = rectOf(b), f = from[i];
-      b.animate([f, to], {duration: D, easing: EASE});
+// ---------- scenes ----------
+const DEF = {
+  _chap: [(tl, el) => {
+    tl.from($$('.gl', el), { scaleY: 0, transformOrigin: '50% 0%', duration: 1.5, ease: 'expo.inOut', stagger: .07 }, 0);
+    tl.fromTo($('.big', el), { clipPath: 'inset(100% 0% 0% 0%)', y: 120 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 1.8, ease: 'expo.out' }, .25);
+    type(tl, $('.k', el), .5); lines(tl, $('.h1', el), .6); blur(tl, $('.b', el), 1.1);
+  }],
+  cover: [(tl, el) => {
+    type(tl, $('.k', el), .2); lines(tl, $('.d1', el), .35, .12);
+    draw(tl, $('.ul', el), 1.1, 1.1); blur(tl, $('.b', el), 1.4); tl.from($('.meta', el), { opacity: 0, duration: 1 }, 1.9);
+  }],
+  manifesto: [(tl, el) => {
+    words(tl, $('.man', el), .1, .09);
+    draw(tl, $('.ml', el), 1.6, .8); lines(tl, $('.tag', el), 1.9);
+  }],
+  objectives: [(tl, el) => {
+    header(tl, el);
+    $$('.row', el).forEach((r, i) => { const t = .7 + i * .35; draw(tl, $('line', r), t, 1.1); tl.from($('.n', r), { opacity: 0, x: -20, duration: .6 }, t + .25); lines(tl, $('.t', r), t + .3); });
+  }],
+  define: [(tl, el) => {
+    header(tl, el);
+    draw(tl, $$('.vc', el), .5, 1.5, .25);
+    tl.from($$('.vl', el), { opacity: 0, y: 10, stagger: .2, duration: .7 }, 1.2);
+    tl.to($$('.vc', el), { fill: 'rgba(198,255,61,0.07)', duration: 1 }, 2);
+    tl.from($('.vh', el), { opacity: 0, scale: .4, transformOrigin: '50% 50%', duration: .9, ease: 'back.out(2)' }, 2.2);
+    words(tl, $('.q', el), 1, .035); tl.from($$('.src', el)[0], { opacity: 0, duration: .6 }, 1.9);
+    draw(tl, $('.dv', el), 2.3, .9); type(tl, $('.k2', el), 2.6); lines(tl, $('.def', el), 2.7);
+    tl.from($$('.src', el)[1], { opacity: 0, duration: .6 }, 3.2);
+  }],
+  why: [(tl, el) => {
+    header(tl, el);
+    draw(tl, $('.trk', el), .3, 1.1);
+    tl.fromTo($('.arc', el), { drawSVG: '0% 0%' }, { drawSVG: '0% 75%', duration: 2.2, ease: 'power2.inOut' }, .8);
+    count(tl, $('.pct', el), 75, .8, { d: 2.2, suf: '%' }); tl.from($('.pl', el), { opacity: 0 }, 1.2);
+    lines(tl, $('.lead', el), 1, .07);
+    up(tl, $$('.st', el), 1.7, .2); count(tl, $('.s1', el), 43, 1.7, { suf: 'M' }); count(tl, $('.s2', el), 18, 1.9, { suf: 'M' });
+    type(tl, $('.k3', el), 2.5);
+    $$('.bh', el).forEach((b, i) => { draw(tl, $('line', b), 2.6 + i * .15, .7); tl.from($('.t', b), { opacity: 0, x: -14, duration: .6 }, 2.75 + i * .15); });
+    tl.from($('.srcl', el), { opacity: 0 }, 3.3);
+  }],
+  determinants: [(tl, el) => {
+    header(tl, el);
+    const core = $('.core', el), bands = $$('.band', el), hint = $('.hint', el), all = [core, ...bands];
+    tl.from(core, { scale: 0, transformOrigin: '50% 100%', duration: .9, ease: 'back.out(1.6)' }, .5);
+    bands.forEach((b, i) => tl.fromTo(b, { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 1.1, ease: 'power3.inOut' }, .8 + i * .28));
+    tl.from($$('.bl', el), { opacity: 0, y: 8, duration: .5, stagger: .28 }, 1.2);
+    tl.from(hint, { opacity: 0 }, 2.6);
+    const D = ['Fixed factors — age, sex and genes. We cannot change these.', 'Individual lifestyle — what you eat, how you move, sleep, drink and smoke.',
+      'Social & community networks — family, friends and community shape your habits.', 'Living & working conditions — housing, food, education, work, healthcare, water.',
+      'Socioeconomic, cultural & environmental conditions — income, policy, culture, air quality.'];
+    all.forEach(b => b.style.cursor = 'pointer');
+    const pick = i => { all.forEach((b, j) => gsap.to(b, { opacity: j === i ? 1 : .22, duration: .4, overwrite: 'auto' })); hint.textContent = D[i]; hint.style.color = i === 1 ? '#C6FF3D' : '#F2EFE8'; };
+    all.forEach(b => { b.onmouseenter = () => pick(+b.dataset.i); b.onclick = e => { e.stopPropagation(); pick(+b.dataset.i); }; });
+    $('.rb', el).onmouseleave = () => { all.forEach(b => gsap.to(b, { opacity: 1, duration: .4, overwrite: 'auto' })); hint.textContent = 'Hover a layer →'; hint.style.color = ''; };
+  }],
+  pillars: [(tl, el) => {
+    header(tl, el); draw(tl, $('.base', el), .4, 1.2);
+    tl.from($$('.col', el), { scaleY: 0, transformOrigin: '50% 100%', duration: 1.4, ease: 'expo.out', stagger: .12 }, .8);
+    tl.from($$('.cl', el), { opacity: 0, y: 24, stagger: .12, duration: .7 }, 1.1);
+    tl.from($$('.cn', el), { opacity: 0, y: -14, stagger: .12, duration: .6 }, 1.4);
+    tl.from($$('.cd', el), { opacity: 0, stagger: .12, duration: .6 }, 1.6);
+    tl.fromTo($('.lintel', el), { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 1.2, ease: 'power3.inOut' }, 2.3);
+    tl.from($('.cap', el), { opacity: 0, y: 10, duration: .6 }, 3);
+  }],
+  move: [(tl, el) => {
+    header(tl, el);
+    blur(tl, $('.bignum', el), .3); count(tl, $('.bignum', el), 150, .3, { d: 2.6 });
+    tl.from($('.unit', el), { opacity: 0 }, .9); lines(tl, $('.note', el), 1.2, .07);
+    tl.from($$('[data-f]', el), { opacity: 0 }, .6); tl.from($$('.dl', el), { opacity: 0, stagger: .05 }, .6);
+    draw(tl, $('.axis', el), .6, 1);
+    tl.from($$('.bar', el), { scaleY: 0, transformOrigin: '50% 100%', stagger: .14, duration: .6, ease: 'power3.out' }, 1);
+    draw(tl, $('.cum', el), 1.1, 2); tl.from($$('.dot', el), { scale: 0, transformOrigin: '50% 50%', stagger: .27, duration: .4, ease: 'back.out(3)' }, 1.3);
+    tl.from($('.endlab', el), { opacity: 0, x: -12, duration: .6 }, 3); tl.from($('.srcl', el), { opacity: 0 }, 3.2);
+  }],
+  eat: [(tl, el) => {
+    header(tl, el);
+    $$('.seg', el).forEach((s, i) => draw(tl, s, .6 + i * .6, .9));
+    $$('.lg', el).forEach((r, i) => { tl.from(r, { opacity: 0, x: -24, duration: .7 }, .9 + i * .6); count(tl, $('.pc', r), +r.dataset.v, .9 + i * .6, { d: .9, suf: '%' }); });
+    up(tl, $$('.tip', el), 2.8, .15); tl.from($('.srcl', el), { opacity: 0 }, 3.4);
+  }],
+  sleep: [(tl, el) => {
+    header(tl, el);
+    draw(tl, $('.dialc', el), .3, 1.3);
+    tl.from($$('.tick', el), { opacity: 0, stagger: .025, duration: .2 }, .5);
+    tl.from($$('.hl', el), { opacity: 0, stagger: .1 }, 1);
+    draw(tl, $('.night', el), 1.4, 1.6); blur(tl, $('.dialn', el), 1.6);
+    tl.from($('.moon', el), { opacity: 0, duration: .6 }, 2.8);
+    gsap.to($('.moon', el), { rotation: 120, svgOrigin: '560 650', duration: 7, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 3 });
+    $$('.hb', el).forEach((b, i) => { const t = 1.2 + i * .3; draw(tl, $('line', b), t, .8); tl.from([$('.n', b), $('.t', b)], { opacity: 0, y: 14, duration: .6, stagger: .08 }, t + .2); });
+    tl.from($('.srcl', el), { opacity: 0 }, 2.6);
+  }],
+  mind: [(tl, el) => {
+    header(tl, el); lines(tl, $('.try', el), .5);
+    tl.from($$('.ring', el), { scale: .3, opacity: 0, transformOrigin: '50% 50%', stagger: .15, duration: 1.4, ease: OUT }, .4);
+    const core = $('.core', el), bt = $('.bt', el);
+    gsap.set(core, { scale: .45 });
+    tl.from([core, bt], { opacity: 0, duration: .8 }, .9);
+    const sw = t => gsap.fromTo(bt, { opacity: 0 }, { opacity: 1, duration: .6, onStart: () => bt.textContent = t });
+    gsap.timeline({ repeat: -1, delay: 1.2 })
+      .add(() => sw('Breathe in')).to(core, { scale: 1, duration: 4, ease: 'sine.inOut' })
+      .add(() => sw('Breathe out')).to(core, { scale: .45, duration: 4, ease: 'sine.inOut' });
+    gsap.to($$('.ring', el), { scale: 1.04, duration: 4, ease: 'sine.inOut', repeat: -1, yoyo: true, stagger: .3, delay: 1.2 });
+    $$('.act', el).forEach((a, i) => { const t = 1.1 + i * .3; draw(tl, $('line', a), t, .7); tl.from($$('.n,.t,.d', a), { opacity: 0, y: 14, stagger: .07, duration: .6 }, t + .15); });
+  }],
+  cut: [(tl, el) => {
+    header(tl, el);
+    $$('.w', el).forEach((w, i) => {
+      const t = .6 + i * .55;
+      tl.from(w, { opacity: 0, y: 40, filter: 'blur(10px)', duration: .8, ease: 'power3.out' }, t);
+      tl.fromTo($('.strike', w), { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power2.inOut' }, t + .5);
+      tl.to($('.wt', w), { color: '#4A4F5E', duration: .5 }, t + .7);
     });
-    if (!magic) B.animate([{opacity:0},{opacity:1}], {duration: 600, easing: 'ease-out'});
-    [...B.children].filter(c => !pairedB.has(c) && !c.hasAttribute('data-build-in') && c.tagName !== 'ASIDE')
-      .forEach(c => c.animate([{opacity:0, translate:'0 24px'},{opacity:1, translate:'0 0'}], {duration: 700, delay: magic ? 380 : 120, easing: OUT, fill: 'backwards'}));
-    setTimeout(() => {
-      A.classList.remove('on'); A.style.zIndex = '';
-      A.getAnimations({subtree: true}).forEach(x => x.cancel());
-      busy = false;
-    }, D + 40);
-    cur = n; update(); runAuto(magic ? 650 : 400);
-  }, 260);
+    lines(tl, $('.sub', el), 2.9); tl.from($('.pick', el), { opacity: 0, x: -10 }, 3.5);
+  }],
+  lifespan: [(tl, el) => {
+    header(tl, el);
+    const st = { z: 0 };
+    const lin = a => 140 + a * 20.5;
+    const pw = a => a <= 18 ? 140 + a * (460 / 18) : a <= 25 ? 600 + (a - 18) * (700 / 7) : 1300 + (a - 25) * (480 / 55);
+    const X = a => lin(a) + (pw(a) - lin(a)) * st.z;
+    const bands = $$('.lband', el), hot = $('.lband.hot', el), here = $('.here', el), herel = $('.herel', el);
+    const lay = () => {
+      $$('[data-a]', el).forEach(t => t.style.left = X(+t.dataset.a) + 'px');
+      bands.forEach(b => { const x0 = X(+b.dataset.a0), x1 = X(+b.dataset.a1); b.style.left = x0 + 1 + 'px'; b.style.width = (x1 - x0 - 2) + 'px'; });
+      const c = (X(18) + X(25)) / 2; here.style.left = c - 95 + 'px'; herel.style.left = c - 1 + 'px';
+    };
+    lay(); here.style.width = '190px'; here.style.textAlign = 'center';
+    tl.from($('.lax', el), { scaleX: 0, transformOrigin: '0 50%', duration: 1.3, ease: 'expo.inOut' }, .4);
+    tl.from($$('.ltk,.ltl', el), { opacity: 0, stagger: .04, duration: .4 }, .8);
+    tl.from(bands, { opacity: 0, y: 20, stagger: .12, duration: .7 }, 1.1);
+    tl.from($$('b,span', hot), { opacity: 0, duration: .01 }, 0);
+    tl.to(st, { z: 1, duration: 2, ease: 'power3.inOut', onUpdate: lay }, 2.4);
+    tl.to($$('b,span', hot), { opacity: 1, duration: .5 }, 3.8);
+    tl.from(here, { y: -60, opacity: 0, duration: .8, ease: 'bounce.out' }, 4.2);
+    tl.from(herel, { scaleY: 0, transformOrigin: '50% 0%', duration: .5 }, 4.6);
+    up(tl, $$('.tk', el), 4.6, .15);
+  }],
+  change: [(tl, el) => {
+    header(tl, el);
+    draw(tl, $('.stair', el), .4, 2.6);
+    $$('.stl', el).forEach((s, i) => tl.from(s, { opacity: 0, y: 16, duration: .6 }, .7 + i * .45));
+    const c = $('.climber', el);
+    tl.from(c, { scale: 0, transformOrigin: '50% 50%', duration: .4 }, 2.8);
+    const P = [[370, 806], [670, 701], [970, 596], [1270, 491], [1600, 386]];
+    P.forEach(([x, y], i) => {
+      tl.to(c, { attr: { cx: x, cy: y }, duration: .55, ease: 'power2.inOut' }, 3.1 + i * .5);
+      tl.to($('b', $$('.stl', el)[i]), { color: '#C6FF3D', duration: .3 }, 3.5 + i * .5);
+    });
+    tl.from($('.mfill', el), { opacity: 0, duration: 1 }, 5.6);
+    draw(tl, $('.relapse', el), 6, 1.4); tl.from($('.rhead', el), { opacity: 0, duration: .3 }, 7.3); tl.from($('.rlab', el), { opacity: 0, y: -10 }, 6.6);
+  }],
+  habit: [(tl, el) => {
+    header(tl, el);
+    draw(tl, $$('.ax', el), .3, 1); tl.from($$('.hk,.hg', el), { opacity: 0, stagger: .04 }, .7);
+    draw(tl, $('.curve', el), 1.1, 1.6); tl.from($('.clab', el), { opacity: 0, y: 10 }, 2.2);
+    blur(tl, $('.h66', el), .6); tl.from($('.foot', el), { opacity: 0 }, 2.6);
+    gsap.set([$('.band', el), $('.blab', el), $('.m66', el), $('.d66', el)], { opacity: 0 });
+    // hover readout
+    const hit = $('.hit', el), xh = $('.xh', el), xd = $('.xd', el), xr = $('.xr', el);
+    gsap.set([xh, xd], { opacity: 0 });
+    hit.onmousemove = e => {
+      const [x] = S2(e.clientX, e.clientY); const d = Math.max(0, Math.min(260, (x - 300) / 1400 * 260));
+      const real = el._real, a = real ? 1 - Math.exp(-d / 22) : Math.min(d / 21, 1), y = 880 - a * 480;
+      gsap.set(xh, { attr: { x1: x, x2: x }, opacity: 1 }); gsap.set(xd, { attr: { cx: x, cy: y }, opacity: 1 });
+      xr.textContent = `Day ${Math.round(d)} · ${Math.round(a * 100)}% automatic`; gsap.set(xr, { left: x + 18, top: y - 50, opacity: 1 });
+    };
+    hit.onmouseleave = () => gsap.to([xh, xd, xr], { opacity: 0, duration: .3 });
+    el._real = false;
+  }, (tl, el) => {
+    tl.add(() => el._real = true, 0);
+    tl.to($('.curve', el), { morphSVG: $('.real', el), stroke: '#C6FF3D', duration: 1.8, ease: 'power3.inOut' }, 0);
+    tl.to($('.clab', el), { opacity: 0, duration: .3 }, 0);
+    tl.to($('.band', el), { opacity: 1, duration: 1 }, 1);
+    tl.to($('.blab', el), { opacity: 1, duration: .6 }, 1.3);
+    tl.fromTo($('.m66', el), { opacity: 1, drawSVG: '0%' }, { drawSVG: '100%', duration: .8 }, 1.6);
+    tl.fromTo($('.d66', el), { opacity: 0, scale: 0, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: .5, ease: 'back.out(3)' }, 2.2);
+    const n = $('.n66', el), o = { v: 21 };
+    tl.to(n, { color: '#C6FF3D', duration: .8 }, .4);
+    tl.to(o, { v: 66, duration: 1.8, ease: 'power2.out', onUpdate: () => n.textContent = Math.round(o.v) }, .4);
+    tl.add(() => $('.lab66', el).textContent = 'days — the median', .4);
+    tl.add(() => $('.foot', el).textContent = '96 participants · 12 weeks · missing a single day did not derail the habit · hover the chart', 1);
+  }],
+  blueprint: [(tl, el) => {
+    header(tl, el);
+    draw(tl, $('.dayl', el), .3, 1.2); tl.from($$('[data-f]', el), { opacity: 0 }, .8);
+    const sun = $('.sun', el), T = 4.4, t0 = 1.2;
+    tl.from(sun, { scale: 0, duration: .4 }, t0 - .2);
+    tl.to(sun, { x: 1640, duration: T, ease: 'none' }, t0);
+    $$('.ev', el).forEach(ev => {
+      const t = t0 + (+ev.dataset.x - 140) / 1640 * T;
+      tl.from($('.evd', ev), { scale: 0, duration: .4, ease: 'back.out(3)' }, t);
+      tl.from($('.evl', ev), { scaleY: 0, transformOrigin: '50% 50%', duration: .3 }, t);
+      tl.from([$('.evt', ev), $('.evx', ev)], { opacity: 0, y: 12, duration: .5, stagger: .06 }, t + .05);
+    });
+    lines(tl, $('.tagl', el), t0 + T + .2);
+  }],
+  activity: [(tl, el, on) => {
+    header(tl, el);
+    $$('.act', el).forEach((a, i) => { const t = .6 + i * .3; draw(tl, $('line', a), t, .7); tl.from($$('.n,.t,.d', a), { opacity: 0, y: 14, stagger: .07, duration: .6 }, t + .15); });
+    draw(tl, $('.tr', el), .5, 1.2); tl.fromTo($('.tring', el), { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', duration: 1.4, ease: 'power2.inOut' }, .8);
+    blur(tl, $('.timer', el), 1); tl.from($('.tbtn', el), { opacity: 0, y: 14 }, 1.6);
+    const tm = $('.timer', el), btn = $('.tbtn', el), ring = $('.tring', el);
+    let rem = 600, iv = null;
+    const show = () => { tm.textContent = String(Math.floor(rem / 60)).padStart(2, '0') + ':' + String(rem % 60).padStart(2, '0'); gsap.set(ring, { drawSVG: `0% ${rem / 6}%` }); };
+    tm.textContent = '10:00';
+    btn.textContent = 'Start';
+    btn.onclick = e => {
+      e.stopPropagation();
+      if (rem <= 0) { rem = 600; show(); }
+      if (iv) { clearInterval(iv); iv = null; btn.textContent = 'Resume'; return; }
+      btn.textContent = 'Pause';
+      iv = setInterval(() => { rem--; show(); if (rem <= 0) { clearInterval(iv); iv = null; btn.textContent = 'Reset'; tm.textContent = 'Time!'; gsap.fromTo(tm, { scale: 1.12 }, { scale: 1, duration: .6, ease: 'elastic.out(1,.4)' }); } }, 1000);
+    };
+    on(() => clearInterval(iv));
+  }],
+  debate: [(tl, el) => {
+    header(tl, el);
+    tl.from($('.beam i', el), { scaleX: 0, duration: 1.2, ease: 'expo.inOut' }, .4); tl.from($('.piv', el), { opacity: 0, y: 20 }, .8);
+    gsap.fromTo($('.beam', el), { rotation: -2.5 }, { rotation: 2.5, duration: 3.2, ease: 'sine.inOut', repeat: -1, yoyo: true, transformOrigin: '50% 50%', delay: 1.4 });
+    draw(tl, $('.mid', el), .6, 1.2);
+    tl.from($('.side.l', el), { opacity: 0, x: -80, filter: 'blur(10px)', duration: 1.1, ease: 'power3.out' }, 1);
+    tl.from($('.side.r', el), { opacity: 0, x: 80, filter: 'blur(10px)', duration: 1.1, ease: 'power3.out' }, 1.3);
+    tl.from($('.prm', el), { opacity: 0, y: 12 }, 2.2);
+  }],
+  quiz: [(tl, el) => {
+    header(tl, el);
+    $$('.qr', el).forEach((r, i) => { const t = .5 + i * .2; draw(tl, $('line', r), t, .8); tl.from([$('.n', r), $('.qq', r), $('.qm', r)], { opacity: 0, y: 14, stagger: .06, duration: .6 }, t + .1); });
+  }, ...[0, 1, 2, 3].map(i => (tl, el) => {
+    const r = $$('.qr', el)[i], v = $('.qv', r), m = $('.qm', r);
+    tl.to(m, { opacity: 0, y: -20, duration: .3 }, 0);
+    tl.fromTo(v, { opacity: 0, y: 30, filter: 'blur(10px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: .7, ease: 'power3.out' }, .1);
+    if (v.dataset.n) { const txt = v.textContent, n = +v.dataset.n, suf = txt.replace(/^[0-9]+/, ''); count(tl, v, n, .1, { d: 1.2, suf }); }
+    tl.fromTo($('line', r), { stroke: '#F2EFE8' }, { stroke: '#C6FF3D', duration: .4 }, .1);
+  })],
+  close: [(tl, el) => {
+    type(tl, $('.k', el), .3); lines(tl, $('.d1', el), .4, .12);
+    words(tl, $('.c1', el), 1.3, .12); tl.from($('.c2', el), { opacity: 0, y: 16, duration: .8 }, 2.4);
+  }],
+  sources: [(tl, el) => { header(tl, el); up(tl, $$('.refs p', el), .4, .07); }]
+};
+
+// ---------- world ----------
+function world(el) {
+  if (!W) return;
+  const name = el.dataset.world;
+  if (W.morph(name)) gsap.to(W.u.uP, { value: 1, duration: 2.8, ease: 'none', overwrite: true });
+  const [c, l] = (el.dataset.cam || '0,0,12').split('|');
+  const cp = c.split(',').map(Number), lp = (l || '0,0,0').split(',').map(Number);
+  gsap.to(W.cam, { x: cp[0], y: cp[1], z: cp[2], lx: lp[0], ly: lp[1], lz: lp[2], duration: 2.4, ease: 'power3.inOut', overwrite: true });
+  gsap.to(W.u.uO, { value: +el.dataset.glow || .4, duration: 1.8, overwrite: true });
+  const sp = W.SPIN[name] || 0; gsap.to(W.spin, { v: sp, duration: 1.5, overwrite: true });
+  if (!sp) { const y = W.group.rotation.y, t = Math.round(y / (Math.PI * 2)) * Math.PI * 2; gsap.to(W.group.rotation, { y: t, duration: 2.4, ease: 'power3.inOut', overwrite: true }); }
 }
-function next() {
-  if (stepIx < steps.length) { clearTimers(); const g = steps[stepIx++]; play(g); runAuto(420); return; }
-  if (!busy) go(cur + 1);
+
+// ---------- navigation ----------
+let cur = -1, steps = [], si = 0, lock = 0;
+function leave(el, dir) {
+  (el._cleanup || []).forEach(f => f()); el._cleanup = [];
+  const ctx = el._ctx;
+  el._exit = gsap.to(el, { opacity: 0, y: dir > 0 ? -60 : 60, scale: .985, filter: 'blur(16px)', duration: .7, ease: 'power2.in',
+    onComplete: () => { ctx && ctx.revert(); el.classList.remove('on'); gsap.set(el, { clearProps: 'opacity,transform,filter' }); el._exit = null; } });
 }
-function prev() { if (!busy) go(cur - 1); }
-function update() {
-  document.getElementById('bar').style.width = ((cur + 1) / S.length * 100) + '%';
-  document.getElementById('count').textContent = (cur + 1) + ' / ' + S.length;
-  const a = S[cur].querySelector('aside'); document.getElementById('notes').textContent = a ? a.textContent : '';
+function enter(el, dir) {
+  if (el._exit) el._exit.progress(1);
+  el.classList.add('on'); el._cleanup = [];
+  const defs = DEF[el.id] || (el.classList.contains('chap') ? DEF._chap : []);
+  el._ctx = gsap.context(() => {
+    steps = defs.map((fn, i) => {
+      const tl = gsap.timeline({ paused: true }), inner = gsap.timeline();
+      fn(inner, el, f => el._cleanup.push(f));
+      tl.add(inner, i === 0 && dir > 0 ? .45 : 0);
+      return tl;
+    });
+  }, el);
+  if (dir > 0 && !reduce) { si = 0; if (steps[0]) { steps[0].play(); si = 1; } }
+  else {
+    steps.forEach(t => t.progress(1)); si = steps.length;
+    gsap.fromTo(el, { opacity: 0, filter: 'blur(14px)' }, { opacity: 1, filter: 'blur(0px)', duration: .8, delay: .35, clearProps: 'opacity,filter' });
+  }
+}
+function go(n, force) {
+  if (n < 0 || n >= N || n === cur) return;
+  const now = performance.now(); if (!force && now < lock) return; lock = now + 500;
+  const dir = n > cur ? 1 : -1, back = !force && n === cur - 1;
+  if (cur >= 0) leave(scenes[cur], dir);
+  cur = n; enter(scenes[n], back ? -1 : 1); world(scenes[n]); ui();
+}
+function next() { if (si < steps.length) { steps[si++].play(); return; } go(cur + 1); }
+function prev() { go(cur - 1); }
+
+const chap = $('#chap'); let lastCh = 0;
+function ui() {
+  const el = scenes[cur];
+  gsap.to('#fill', { width: (cur + 1) / N * 1640, duration: .8, ease: 'power3.out' });
+  $('#cnt').textContent = String(cur + 1).padStart(2, '0') + ' / ' + N;
+  const c = +el.dataset.ch || 0;
+  if (c !== lastCh || !chap.dataset.init) {
+    chap.dataset.init = 1; lastCh = c;
+    gsap.to(chap, { opacity: 0, y: -8, duration: .25, onComplete: () => { chap.textContent = CHN[c]; gsap.fromTo(chap, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .5 }); } });
+  }
+  $('#notes span').textContent = el.dataset.notes || '';
   history.replaceState(null, '', '#' + (cur + 1));
 }
-const notes = document.getElementById('notes');
-function toggleNotes() { notes.style.display = notes.style.display === 'block' ? 'none' : 'block'; }
-function fs() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
+// chapter ticks on the progress track
+scenes.forEach((s, i) => { if (s.classList.contains('chap')) { const t = document.createElement('i'); t.style.left = (i / N * 1640) + 'px'; $('#trk').appendChild(t); } });
+
 addEventListener('keydown', e => {
-  if (['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)) { e.preventDefault(); next(); }
-  else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
-  else if (e.key === 'Home') go(0, true); else if (e.key === 'End') go(S.length - 1, true);
-  else if (e.key === 'f' || e.key === 'F') fs(); else if (e.key === 'n' || e.key === 'N') toggleNotes();
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+  else if (e.key === 'Home') { e.preventDefault(); go(0, true); }
+  else if (e.key === 'End') { e.preventDefault(); go(N - 1, true); }
+  else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
+  else if (e.key === 'n' || e.key === 'N') { const n = $('#notes'); n.style.display = n.style.display === 'block' ? 'none' : 'block'; }
 });
 document.addEventListener('click', e => {
-  if (e.target.closest('#hud,#notes')) return;
-  e.clientX < innerWidth * 0.3 ? prev() : next();
+  if (e.target.closest('[data-ui],#notes,.band,.core')) return;
+  e.clientX < innerWidth * .25 ? prev() : next();
 });
+let wacc = 0, wlock = 0;
+addEventListener('wheel', e => {
+  const now = performance.now(); if (now < wlock) return;
+  wacc += e.deltaY; if (Math.abs(wacc) > 50) { wacc > 0 ? next() : prev(); wacc = 0; wlock = now + 900; }
+}, { passive: true });
 let tx = null;
-addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive: true});
+addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive: true });
 addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) dx < 0 ? next() : prev(); tx = null; });
-document.getElementById('bf').onclick = fs;
-document.getElementById('bn').onclick = toggleNotes;
-setTimeout(() => document.getElementById('help').style.opacity = 0, 4000);
-const start = Math.max(0, Math.min(S.length - 1, (parseInt(location.hash.slice(1)) || 1) - 1));
-Promise.all([document.fonts.load('700 40px Oswald'), document.fonts.load('400 20px "DM Sans"')]).catch(()=>{}).then(() => go(start, true));
+
+// ---------- start ----------
+Promise.all([document.fonts.load('600 40px "Inter Tight"'), document.fonts.load('400 20px "JetBrains Mono"')]).catch(() => {}).then(() => {
+  gsap.from('.crop path', { drawSVG: 0, duration: 1.4, ease: 'power2.inOut', stagger: .1 });
+  gsap.from(['#brand', '#chap', '#trk', '#cnt'], { opacity: 0, duration: 1.2, delay: .4, stagger: .1 });
+  gsap.to('#help', { opacity: 0, duration: 1, delay: 6 });
+  const h = parseInt(location.hash.slice(1)) || 1;
+  go(Math.max(0, Math.min(N - 1, h - 1)), true);
+});
 })();
 </script>
 </body>
